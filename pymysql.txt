@@ -1,0 +1,11 @@
+1.
+	conn = pymysql.connect(host="127.0.0.1", port=3306, user="root", password="root")
+        
+	cursor = conn.cursor()
+     
+    cursor.execute("drop database test")
+	//  !!!!  在for循环中，循坏使用execute执行sql语句，  要 conn.commit()一下，否则数据库不会保存
+	调用本地shell运行sql文件  .sql导入数据库可能用到
+	cmd = "mysql -uroot -root -e 'source ./temp.sql'" 
+	os.system(cmd)
+	os.popen(cmd)
