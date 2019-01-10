@@ -62,4 +62,48 @@
     # httponly 设置为True,禁止客户端 JS 获取 cookie
     
 ```
+
+### 自定义上下文：context_processor上下文处理器
+```python
+    @app.context_processor
+    def inject_foo():
+        foo = 'I am foo.'
+        bar = 'I am bar.'
+        return dict(foo=foo,bar=bar)
+
+    # .html
+    {{foo}}
+    {{bar}}
+```
+
+
+### 自定义全局函数
+```python
+    @app.template_global()
+    def bar():
+        return 'this is bar'
+```
+
+
+### 自定义过滤器
+```python
+    @app.template_filter()
+    def musical(s):
+        return "hello" + s
     
+    使用: {{ name|musical }}
+```
+
+### 模板继承
+```python
+    # base.html
+    {% block content %} {% endblock %}
+
+    # use-base.html
+    {% extends 'base.html' %}
+
+    {% block content %}
+        {{ super() }}               # 追加内容
+        <h1>use base.html</h1>
+    {% endblock %}
+```
