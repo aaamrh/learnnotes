@@ -107,3 +107,102 @@
         <h1>use base.html</h1>
     {% endblock %}
 ```
+
+### 消息闪现
+``` python
+    @app.route('/flash/')
+    def just_flash():
+        flash(u'这是flask的闪现')
+        return redirect(url_for('base'))
+
+    # 在html中，需要用get_flash_message 获取消息
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+
+    # flash()函数发送的消息会存储在session中
+    # get_flashed_message()函数被调用时，session中存储的所有消息都会被移除
+
+```
+
+
+### 404 页面
+``` python
+    # 错误函数处理需要附加 app.errorhandler()装饰器
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('errors/404.html'), 404
+```
+
+### 链接数据库
+```sql
+    -- mysql8.0 版本之后1130解决方案
+    CREATE USER 'marh'@'%' IDENTIFIED BY 'password';
+
+    GRANT ALL PRIVILEGES ON *.* TO 'marh'@'%' WITH GRANT OPTION;
+
+    -- mysql8.0之前
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;
+
+    flush privileges;
+```
+
+### python shell CURD
+```python
+
+    from app import db, Note
+    # Create
+    note = Note(body='Are these your keys?')
+    db.session.add(note)
+    db.session.commit()
+
+    # Read
+    # 执行sql语句
+    sql = 'select * from note'
+    res = db.session.execute(sql)
+
+    Note.query.all()
+    Note.query.first()
+    Note.query.get(id)
+    Note.query.count()
+    Note.query.filter_by(body='hello').first()
+    Note.query.filter(Note.body='hello').first()
+    Note.query.filter(Note.body.like('%hello%'))
+    Note.query.filter(Note.body.in_(['bar', 'foo', 'baz']))
+    Note.query.filter(-Note.body.in_(['foo','bar']))
+
+    Note.query.filter(and_(Note.body=='foo', Note.title =='2019')) 
+    # 或者
+    Note.query.filter(Note.body=='foo',Note.tite =='2019')
+    # 或者
+    Note.query.filter(Note.body=='foo').filter(Note.title=='2019')
+
+    Note.query.filter(or_(Note.body=='foo', Note.body=='bar'))
+
+    # Update
+    note = Note.query.get(2)
+    note.body = 'update'
+    db.session.commit()
+
+    # delete
+    note = Note.query.get(2)
+    db.session.delete(note)
+    db.session.commit()
+
+
+
+```
+
+### 在视图函数里操作数据库
+```python
+
+    # Create
+    body = form.body.data
+    note = Note(body=body)
+    db.session.add(note)
+    db.session.commit()
+
+    # Read
+    
+```
