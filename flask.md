@@ -5,6 +5,7 @@
 > - `pipenv install` 创建虚拟环境
 > - `pipenv shell` 激活虚拟环境
 > - `pipenv graph` 查看当前环境下的依赖情况
+> - `pipenv run` 用当前虚拟环境运行程序 eg: pipenv run python
 
 ---
 #### 管理环境变量
@@ -146,12 +147,23 @@
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;
 
     flush privileges;
+
+    -- mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password
+    use mysql;
+    
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; -- 更改加密方式
+
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; -- 更新用户密码
+
+    FLUSH PRIVILEGES; -- 刷新权限
 ```
 
 ### python shell CURD
 ```python
 
     from app import db, Note
+
+    from sqlalchemy import or_, and_
     # Create
     note = Note(body='Are these your keys?')
     db.session.add(note)
@@ -168,17 +180,17 @@
     Note.query.count()
     Note.query.filter_by(body='hello').first()
     Note.query.filter(Note.body='hello').first()
-    Note.query.filter(Note.body.like('%hello%'))
-    Note.query.filter(Note.body.in_(['bar', 'foo', 'baz']))
-    Note.query.filter(-Note.body.in_(['foo','bar']))
+    Note.query.filter(Note.body.like('%hello%'))              # LIKE
+    Note.query.filter(Note.body.in_(['bar', 'foo', 'baz']))   # IN
+    Note.query.filter(-Note.body.in_(['foo','bar']))          # NOT IN
 
-    Note.query.filter(and_(Note.body=='foo', Note.title =='2019')) 
+    Note.query.filter(and_(Note.body=='foo', Note.title =='2019')) # AND
     # 或者
     Note.query.filter(Note.body=='foo',Note.tite =='2019')
     # 或者
     Note.query.filter(Note.body=='foo').filter(Note.title=='2019')
 
-    Note.query.filter(or_(Note.body=='foo', Note.body=='bar'))
+    Note.query.filter(or_(Note.body=='foo', Note.body=='bar'))    # OR
 
     # Update
     note = Note.query.get(2)
@@ -190,8 +202,8 @@
     db.session.delete(note)
     db.session.commit()
 
-
-
+    # filter_by 比 filter 更易于使用
+    Note.query.filter_by(body='SHAVE').first()
 ```
 
 ### 在视图函数里操作数据库
@@ -204,5 +216,21 @@
     db.session.commit()
 
     # Read
-    
+    form = DeleteForm()
+    notes = Note.query.all()
+
+    # Update
+    form = EditNoteForm()
+    note = Note.query.get(note_id)
+    if form.validate_on_submit():
+        note.body = form.body.data
+        db.session.commit()
+        flash('Your note is updated.')
+        return redirect(url_for('index'))
+    form.body.data = note.body
+
+    # Delete
+    note = Note.query.get(note_id)
+    db.session.delete(note)
+    db.session.commit()
 ```
