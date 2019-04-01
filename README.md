@@ -2,5 +2,5 @@
 
 
 ### 用Setting Sync 同步VScode的配置
-    token:    e69bb8004d139a0a5c8a754ae90d45b93b16003f
-    gist-id:  6a301d1b9afaa641232d5798aef935f2
+    token:    ace65a64cbd6f6991d6b7cce34b499051e6559db
+    gist-id:  196ca004878eaeafddc7bb5eaa909142
