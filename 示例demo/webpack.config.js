@@ -27,7 +27,9 @@ module.exports = {
                     '@babel/preset-env'
                   ]
                 }
-              }
+              },
+              include:path.resolve(__dirname, "app/static/js", "app/static/libs"),
+              exclude:/node_modules/
             },
             {
                 test:/\.css$/,
