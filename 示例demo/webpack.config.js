@@ -14,7 +14,8 @@ module.exports = {
     output:{
         filename:"js/[name].bundle.[hash:6].js",
         path:path.join(__dirname, "app/dist/"),
-        chunkFilename: "js/[name].chunk.[hash:6].js"
+        chunkFilename: "js/[name].chunk.[hash:6].js",
+        // publicPath: 'http://www.xxx.com'     // 设置公共路径，一般用来获取CDN上的资源等
     },
     module:{
         rules:[
@@ -34,32 +35,32 @@ module.exports = {
             {
                 test:/\.css$/,
                 use:[
-                  // {
-                  //   loader: 'style-loader',
-                  //   options:{
-                  //     insertAt:'top'
-                  //   }
-                  // },
-                  MiniCssExtractPlugin.loader,  // 抽出CSS放进link标签内，不在放在style标签内
-                 'css-loader',
-                 'postcss-loader'             //  会调用 postcss.config.js
+                    MiniCssExtractPlugin.loader,  // 抽出CSS放进link标签内，不在放在style标签内, 有了这个就不需要style-loader了
+                    // {
+                    //     loader: 'style-loader',
+                    //     options:{
+                    //     insertAt:'top'
+                    //     }
+                    // },
+                    'css-loader',
+                    'postcss-loader'             //  会调用 postcss.config.js
                 ]
             },
             {
-              test:/\.less$/,
-              use:[
-                // {
-                //   loader: 'style-loader',
-                //   options:{
-                //     insertAt:'top'
-                //   }
-                // },
-                MiniCssExtractPlugin.loader,  // 抽出CSS放进link标签内，不在放在style标签内
-               'css-loader',
-               'postcss-loader',
-               'less-loader'
-              ]
-          },
+                test:/\.less$/,
+                use:[
+                    // {
+                    //   loader: 'style-loader',
+                    //   options:{
+                    //     insertAt:'top'
+                    //   }
+                    // },
+                    MiniCssExtractPlugin.loader,  // 抽出CSS放进link标签内，不在放在style标签内
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader'
+                ]
+            },
             {
                 test:/\.(jpg|png|gif|jpeg|svg|eot|ttf|woff|woff2)$/,
                 use:[{
@@ -83,7 +84,6 @@ module.exports = {
 	        }
         ]
     },
-    
   
     plugins:[
         new HtmlWebpackPlugin({
@@ -141,13 +141,20 @@ module.exports = {
         port: 9090,
         compress: true,
         progress: true
-    }
+    },
+
+    // watch:true,            //不可与 devServer同时存在
+    // watchOptions:{
+    //     poll:1000,
+    //     aggreatement:500,
+    //     ignored: /node_modules/
+    // },
     
 }
 
-// npm install mini-css-extract-plugin -D  抽离CSS样式插件
-
 /** 
+ * npm install mini-css-extract-plugin -D  抽离CSS样式插件
+ * 
  * let MiniCssExtractPlugin = require('mini-css-extract-plugin')
  * 
  * new MiniCssExtractPlugin({
@@ -155,7 +162,6 @@ module.exports = {
  * })
  * 
  * 使用后需要自己压缩css js文件,
- * 
  * 
  * npm i optimize-css-assets-webpack-plugin -D
  * let OptimizeCss = require('optimize-css-assets-webpack-plugin')
@@ -186,3 +192,53 @@ module.exports = {
  * npm install babel-loader@8.0.0-beta.0 @babel/core @babel/preset-env
  * 
 */
+
+
+// 全局变量引用问题
+/** 
+ *  npm i expose-loader -D 将变量暴露全局的loader
+ * 
+ *  const webpack = require('webpack');
+ *  rules:[{
+	    test: require.resolve('jquery'), 
+	    use: [
+            {
+                loader: 'expose-loader',
+                options: 'jQuery'
+            }, 
+            {
+                loader: 'expose-loader',
+                options: '$'
+            }   
+        ]
+    }],
+    
+    plugins:[
+        new webpack.ProvidePlugin({   在每个模块都注入$
+            $: 'jquery',
+            jQuery: 'jquery',
+            "window.jQuery": "jquery'",
+            "window.$": "jquery"
+        })
+    ]
+ * 
+*/
+
+// html 中的图片
+/** 
+ *  npm i html-withimg-loader -D
+ * 
+ */
+
+/** 
+ * source-map 方便调试代码     
+ * NOTICE: 当使用了uglifyjs-webpack-plugin 插件时，sourceMap这个值的默认值是false，不开启map。如果要启用map，需要在插件中配置sourceMap值为true。
+ * npm i html-withimg-loader -D
+ * devtool: "source-map" // 会生成一个sourcemap文件，出错会标识错误的位置
+ * devtool: "eval-source-map"  不会生成文件，但是可以显示 行和列
+ * 
+ * module.exports = {
+ *      entry:{}
+ *      devtool: "source-map"
+ * }
+ */

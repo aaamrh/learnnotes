@@ -5,7 +5,20 @@
 > - `pipenv install` 创建虚拟环境
 > - `pipenv shell` 激活虚拟环境
 > - `pipenv graph` 查看当前环境下的依赖情况
-> - `pipenv run` 用当前虚拟环境运行程序 eg: pipenv run python
+> - `pipenv run flask run | flask run` (没进虚拟环境 | 进了虚拟环境) 用当前虚拟环境运行程序 eg: pipenv run python
+
+---
+### 搭建开发环境
+1. ` pip install pipenv`
+2. `pipenv install` 创建虚拟环境，这会为当前项目创建一个文件夹，其中包含隔离的Python解释器环
+境，并且安装pip、wheel、setuptools等基本的包。
+3. `pipenv shell` 命令显式地激活虚拟环境, 当执行pipenv shell或pipenv run命令时， Pipenv会自动从项目目录下
+的.env文件中加载环境变量。
+4. `pipenv install flask`
+5. `pipenv update flask`
+6. `pipenv run flask run | flask run`
+7. `pipenv install python-dotenv` 管理环境变量,在项目根目录下分别创建两个文件： .env和.flaskenv
+
 
 ---
 #### 管理环境变量
