@@ -691,7 +691,6 @@ function f() {
 f(); // undefined
 ```
 
-
 ### 2．
 ``` javascript
 function f() { console.log('I am outside!'); }
@@ -713,7 +712,7 @@ function f() { console.log('I am outside!'); }
   if (false) {}
   f();
 }());
-```
+``` 
 
 # H5
 ### **历史管理**
