@@ -195,6 +195,8 @@ obj.setCapture()  //设置全局捕获，当我们给一个元素设置全局捕
 obj.releaseCapture() // 释放全局捕获 
 
 ```
+![scroll](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll.png)
+![scroll](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll1.png)
 
 ### **快速删除 node_modules**
 	npm install rimraf -g
@@ -485,12 +487,7 @@ var formData = new FormData(document.getElementById("form"));
  
 ```
 
-
-
-
-
-
-
+![点击事件过程](https://github.com/aaamrh/learnnotes/blob/master/images/js/点击事件过程.png)
 
 ### **面向对象**
 ```javascript
@@ -642,7 +639,7 @@ document.designMode='on';  //Firefox(Gecko)
 ```
 
 ### **2.1.2	避免Switch**
-
+![switch优化](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll.png)
  
 
 # 学习ES6遇到的错误
