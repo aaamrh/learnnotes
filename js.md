@@ -1,4 +1,36 @@
-[TOC] 
+* [JS半知半解](#JS半知半解)
+  * [map()](#map())
+  * [事件代理](#事件代理)
+  * [快速删除node_modules](#快速删除node_modules)
+  * [display和visibility,display与transition的冲突](#display和visibility,display与transition的冲突)
+  * [模块（你不知道的javascript上卷）CH5.5](#模块（你不知道的javascript上卷）CH5.5)
+  * [实时请求JSON数据](#实时请求JSON数据)
+  * [去除字符串空格](#去除字符串空格)
+  * [Ajax](#Ajax)
+  * [JS快速解析URL](#JS快速解析URL)
+  * [JS获取非行内样式](#JS获取非行内样式)
+  * [this 和 prototype 的区别](#JS中this和prototype的区别)
+  * [跳出嵌套for循环](#跳出嵌套for循环)
+  * [原生js提交form表单](#原生js提交form表单)
+  * [当图片丢失时传入默认图片](#当图片丢失时传入默认图片)
+  * [子级影响父级的BUG](#子级影响父级的BUG)
+  * [面向对象](#面向对象)
+  * [组件开发之自定义事件](#组件开发之自定义事件)
+* [你所不知道的Javascript (中)](#你所不知道的Javascript(中))
+  * [CH2.值](#CH2.值)
+    * [2.1.2	数组](#2.1.2数组)
+    * [2.1.2	数组方法](#2.1.2数组方法)
+
+* [我所不知道的Javascript](#我所不知道的Javascript)
+  * [2.1.2	让页面处于编辑状态](#2.1.2让页面处于编辑状态)
+  * [2.1.2	避免Switch](#2.1.2避免Switch)
+
+* [学习ES6遇到的错误](#学习ES6遇到的错误)
+  * [1](#1.)
+  * [2](#2.)
+
+* [H5](#H5)
+  * [历史管理](#历史管理)
 
 # JS半知半解
 ### **offsetleft**
@@ -200,17 +232,17 @@ obj.releaseCapture() // 释放全局捕获
 ![scroll](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll.png)
 ![scroll](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll1.png)
 
-### **快速删除 node_modules**
+### **快速删除node_modules**
 	npm install rimraf -g
 	rimraf node_modules
 
-### **display 和 visibility，display与transition的冲突**
+### **display和visibility,display与transition的冲突**
     display:none会引起页面的重绘事件，所以它是一个异步的延时事件，浏览器其实会先解析animate的代码，然后再执行display:none。
     可以用 visibility 来代替display, 还可以用添加 animation 来解决
     !!! 但元素现在可以点击吗？答案是不可以的。
     设为visibility:hidden后，元素现在是不可以选择的既然无法选择，即使绑定了click事件，也自然无法点击啦！
 
-### **模块（你不知道的javascript 上卷 CH5.5）**
+### **模块（你不知道的javascript上卷）CH5.5**
 
 ``` js
   // (1)模块
@@ -393,7 +425,7 @@ obj.currentStyle()
 ele.getBoundingClientRect()
 
 ```
-### **JS中 this 和 prototype 的区别**
+### **JS中this和prototype的区别**
 ``` javascript
 var Foo = function(name){
   var age = 18;
@@ -597,16 +629,16 @@ function extend(o1, o2){
 
 ```
 
-# 你所不知道的Javascript (中)
+# 你所不知道的Javascript(中)
 ## **CH2.值**
-### **2.1.2	数组**
+### **2.1.2数组**
 	1.使用delete可以将单元从数组中删除，但是length属性不会发生变化
 	2.如果字符串的键值能够被强制类型转换为十进制数字的话，他就会被当作数字索引来处理
 		a["13"]=42;
 		a.length         // -> 14
 		
 	3.
-### **2.1.2	数组方法**
+### **2.1.2数组方法**
 ``` javascript
   join()
   var arr = [1,2,3];
@@ -634,13 +666,13 @@ function extend(o1, o2){
 ```
 
 # 我所不知道的Javascript
-### **2.1.2	让页面处于编辑状态**
+### **2.1.2让页面处于编辑状态**
 ``` javascript
 document.body.contentEditable='true'; //Chrome(Chromium)
 document.designMode='on';  //Firefox(Gecko)
 ```
 
-### **2.1.2	避免Switch**
+### **2.1.2避免Switch**
 ![switch优化](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll.png)
  
 
