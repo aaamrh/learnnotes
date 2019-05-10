@@ -23,7 +23,7 @@ wget https://www.python.org/ftp/python/3.5.4/Python-3.7.1.tgz
 `rpm`  软件管理;   redhat的软件格式 rpm
 r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 
-`ap-get` 是ubuntu下的一个软件安装方式，基于debain。
+`apt-get` 是ubuntu下的一个软件安装方式，基于debain。
 
 ---  
 
@@ -78,3 +78,21 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 2. 第一次使用git需要设置 ssh
     1. `ssh-keygen -t rsa -b 2048 -C "your_email@example.com"`
     2. 将 `~/.ssh/id_rsa.pub` 中的秘钥添加到github中的SSH keys中。
+
+
+### Nginx
+1. 启动: `cd /usr/local/nginx/sbin` ,    `./nginx`
+2. 查看运行状态: `ps aux|grep nginx`
+3. 停止服务
+   1. 立即停止服务: `./nginx -s stop`
+   2. 从容停止服务: `./nginx -s quit` (当前工作任务完成后再停止)
+   3. kill 或 killall杀死进程: `kill PID` , `killall Nginx`
+   4. 重启nginx: `nginx -s reload`
+4. nginx 启动后会监听80端口,如果被占用会启动失败 `netstat -tlnp`查看端口占用情况
+5. 访问测试：默认情况下，CentOS开启了iptables防火墙，要让其他浏览器访问web服务器, 需要配置iptables防火墙, 开放80端口：`iptables -I INPUT -p tcp --dport 80 -j ACCEPT`, `service iptables status`查看防火墙状态。
+   1. `-I INPUT` 表示在INPUT(外部访问规则)中插入一条规则
+   2. `-p tcp` 指定数据包匹配的协议(tcp, udp, icmp等), 这里是tcp
+   3. `--dport 80` 指定数据包匹配的目标端口号
+   4. `-j ACCEPT` 制定对数据包的处理操作(ACCEPT, REJECT, DROP, REDIRECT等)
+
+
