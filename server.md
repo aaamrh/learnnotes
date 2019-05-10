@@ -66,3 +66,10 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 - -t 表示查看文件，查看文件中的文件内容
 - -z 调用gzip程序来压缩文件，压缩后的文件名称以.gz结尾。
   
+### 安装nodejs
+
+1. 下载nodejs: `wget https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz`
+2. 解压: `tar -xvf node-v10.15.3-linux-x64.tar.xz`]
+3. 建立软连: `ln -s <路径>/bin/node /usr/local/bin/node` ( npm | npx )
+
+
