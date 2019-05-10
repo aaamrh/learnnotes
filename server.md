@@ -73,3 +73,8 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 3. 建立软连: `ln -s <路径>/bin/node /usr/local/bin/node` ( npm | npx )
 
 
+### 安装git
+1. `yum -y install git`
+2. 第一次使用git需要设置 ssh
+    1. `ssh-keygen -t rsa -b 2048 -C "your_email@example.com"`
+    2. 将 `~/.ssh/id_rsa.pub` 中的秘钥添加到github中的SSH keys中。
