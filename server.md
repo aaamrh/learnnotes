@@ -169,4 +169,27 @@ systemctl restart iptables.service
 
 `阿里云服务器有自己的安全规则，如上配置好后只能内网ping通，外网不能ping通，需在案例云安全组配置中添加规则`
 
-![sdf](安全组配置)
+![阿里云安全组配置](https://github.com/aaamrh/learnnotes/blob/master/images/service/%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E5%85%A8%E7%BB%84%E9%85%8D%E7%BD%AE.png)
+
+
+### 安装配置mongodb
+1. 新建文件： `touch /etc/yum.repos.d/mongodb-org-4.0.repo` 更多见：[Mongodb其他版本安装教程](https://docs.mongodb.com/manual/administration/install-on-linux/)
+```
+    [mongodb-org-4.0]
+    name=MongoDB Repository
+    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+    gpgcheck=1
+    enabled=1
+    gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+```
+2. 安装 `sudo yum install -y mongodb-org`
+3. 服务管理 (我执行下面命令没效果，目前还没有解决)
+   1. `service mongod start` #启动 
+   2. `service mongod stop` #停止 
+   3. `service mongod restart` #重启
+4. 启动服务 `mongod -f /etc/mongod.conf` 或 `mongod –fork –dbpath [dbpath] –logpath [logpath]`。 [mongod参数选项](https://blog.csdn.net/xqzhang8/article/details/72588278)
+5. 关闭后台运行
+   1. `mongo`
+   2. `use admin`
+   3. `db.shutdownServer()`  或者 `db.adminCommand( { shutdown: 1 } )`
+6. 创建用户后登录方式： `mongo --port 27017`, `use database` , `db.auth('marh', '123123')`
