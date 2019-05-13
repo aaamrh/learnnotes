@@ -81,15 +81,73 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 
 
 ### Nginx
+1. 启动: `cd /usr/local/nginx/sbin` ,    `./nginx`
+2. 查看运行状态: `ps aux|grep nginx`
+3. 停止服务
+   1. 立即停止服务: `./nginx -s stop`
+   2. 从容停止服务: `./nginx -s quit` (当前工作任务完成后再停止)
+   3. kill 或 killall杀死进程: `kill PID` , `killall Nginx`
+   4. 重启nginx: `nginx -s reload`
+4. nginx 启动后会监听80端口,如果被占用会启动失败 `netstat -tlnp`查看端口占用情况
+5. 访问测试：默认情况下，CentOS开启了iptables防火墙，要让其他浏览器访问web服务器, 需要配置iptables防火墙, 开放80端口：`iptables -I INPUT -p tcp --dport 80 -j ACCEPT`, `service iptables status`查看防火墙状态。
+   1. `-I INPUT` 表示在INPUT(外部访问规则)中插入一条规则
+   2. `-p tcp` 指定数据包匹配的协议(tcp, udp, icmp等), 这里是tcp
+   3. `--dport 80` 指定数据包匹配的目标端口号
+   4. `-j ACCEPT` 制定对数据包的处理操作(ACCEPT, REJECT, DROP, REDIRECT等)
+   5. 上述操作只是临时生效，并未保存，在系统重启或iptables服务重启后会恢复原来的规则， 可以使用 `service iptables save`保存服务
+   6. `service iptables restart`
 
+`阿里云服务器有自己的安全规则，如上配置好后只能内网ping通，外网不能ping通，需在案例云安全组配置中添加规则`
+
+![阿里云安全组配置](https://github.com/aaamrh/learnnotes/blob/master/images/service/%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E5%85%A8%E7%BB%84%E9%85%8D%E7%BD%AE.png)
+
+
+### 安装配置mongodb
+1. 新建文件： `touch /etc/yum.repos.d/mongodb-org-4.0.repo` 更多见：[Mongodb其他版本安装教程](https://docs.mongodb.com/manual/administration/install-on-linux/)
+```
+    [mongodb-org-4.0]
+    name=MongoDB Repository
+    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+    gpgcheck=1
+    enabled=1
+    gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+```
+2. 安装 `sudo yum install -y mongodb-org`
+3. 服务管理 (我执行下面命令没效果，目前还没有解决)
+   1. `service mongod start` #启动 
+   2. `service mongod stop` #停止 
+   3. `service mongod restart` #重启
+4. 启动服务 `mongod -f /etc/mongod.conf` 或 `mongod –fork –dbpath [dbpath] –logpath [logpath]`。 [mongod参数选项](https://blog.csdn.net/xqzhang8/article/details/72588278)
+5. 关闭后台运行
+   1. `mongo`
+   2. `use admin`
+   3. `db.shutdownServer()`  或者 `db.adminCommand( { shutdown: 1 } )`
+6. 创建用户后登录方式： `mongo --port 27017`, `use database` , `db.auth('marh', '123123')`
+
+
+### `CentOS7 npm全局安装成功，使用提示 Command not found`
+1.  `mkdir ~/.npm-global`
+2.  设置npm用新目录路径: `npm config set prefix '~/.npm-global'`
+3. 打开或创建 `~/.profile`, 添加：`export PATH=~/.npm-global/bin:$PATH`
+4.  刷新系统变量： `source ~/.profile`
+5.  `npm install -g jshint`  全局安装后可以使用了，大功告成~~
+
+
+---
+---
+
+# 知识点
+### **centOS7防火墙：iptables**
+> 是centos7 默认使用的防火墙是Firewall，要先把Firewall 关闭再使用iptables
 #### 0x01介绍
 iptables命令是Linux上常用的防火墙软件，是netfilter项目的一部分
 iptables文件设置路径：命令：vim /etc/sysconfig/iptables-config
+
 #### 0x02注意事项
-如果说你以前使用的是contos7  那么默认使用的防火墙那么就是Firewall 这样的话，就要先把Firewall 给关闭在使用iptables
 关闭Firewall 命令
 命令：systemctl stop firewalld #关闭防火墙
 命令：systemctl disable firewalld #禁止开机启动
+
 #### 0x03检查是否安装了iptables
 命令：service iptables status
 #### 0x04安装iptables
@@ -149,47 +207,3 @@ systemctl restart iptables.service
 命令：iptables -L -n --line-numbers
 比如要删除INPUT里序号为8的规则，执行：
 命令：iptables -D INPUT 8
-
-
-1. 启动: `cd /usr/local/nginx/sbin` ,    `./nginx`
-2. 查看运行状态: `ps aux|grep nginx`
-3. 停止服务
-   1. 立即停止服务: `./nginx -s stop`
-   2. 从容停止服务: `./nginx -s quit` (当前工作任务完成后再停止)
-   3. kill 或 killall杀死进程: `kill PID` , `killall Nginx`
-   4. 重启nginx: `nginx -s reload`
-4. nginx 启动后会监听80端口,如果被占用会启动失败 `netstat -tlnp`查看端口占用情况
-5. 访问测试：默认情况下，CentOS开启了iptables防火墙，要让其他浏览器访问web服务器, 需要配置iptables防火墙, 开放80端口：`iptables -I INPUT -p tcp --dport 80 -j ACCEPT`, `service iptables status`查看防火墙状态。
-   1. `-I INPUT` 表示在INPUT(外部访问规则)中插入一条规则
-   2. `-p tcp` 指定数据包匹配的协议(tcp, udp, icmp等), 这里是tcp
-   3. `--dport 80` 指定数据包匹配的目标端口号
-   4. `-j ACCEPT` 制定对数据包的处理操作(ACCEPT, REJECT, DROP, REDIRECT等)
-   5. 上述操作只是临时生效，并未保存，在系统重启或iptables服务重启后会恢复原来的规则， 可以使用 `service iptables save`保存服务
-   6. `service iptables restart`
-
-`阿里云服务器有自己的安全规则，如上配置好后只能内网ping通，外网不能ping通，需在案例云安全组配置中添加规则`
-
-![阿里云安全组配置](https://github.com/aaamrh/learnnotes/blob/master/images/service/%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E5%85%A8%E7%BB%84%E9%85%8D%E7%BD%AE.png)
-
-
-### 安装配置mongodb
-1. 新建文件： `touch /etc/yum.repos.d/mongodb-org-4.0.repo` 更多见：[Mongodb其他版本安装教程](https://docs.mongodb.com/manual/administration/install-on-linux/)
-```
-    [mongodb-org-4.0]
-    name=MongoDB Repository
-    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
-    gpgcheck=1
-    enabled=1
-    gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
-```
-2. 安装 `sudo yum install -y mongodb-org`
-3. 服务管理 (我执行下面命令没效果，目前还没有解决)
-   1. `service mongod start` #启动 
-   2. `service mongod stop` #停止 
-   3. `service mongod restart` #重启
-4. 启动服务 `mongod -f /etc/mongod.conf` 或 `mongod –fork –dbpath [dbpath] –logpath [logpath]`。 [mongod参数选项](https://blog.csdn.net/xqzhang8/article/details/72588278)
-5. 关闭后台运行
-   1. `mongo`
-   2. `use admin`
-   3. `db.shutdownServer()`  或者 `db.adminCommand( { shutdown: 1 } )`
-6. 创建用户后登录方式： `mongo --port 27017`, `use database` , `db.auth('marh', '123123')`
