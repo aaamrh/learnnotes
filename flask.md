@@ -98,6 +98,8 @@
 ```
 
 ### 自定义上下文：context_processor上下文处理器
+> 如果多个模板都需要使用同一变量， 那么比起在多个视图函数中重复传入， 更好的方法是能够设置一个模板全局变量。 Flask提供了一个`app.context_processor`装饰器，
+
 ```python
     @app.context_processor
     def inject_foo():
@@ -105,7 +107,11 @@
         bar = 'I am bar.'
         return dict(foo=foo,bar=bar)
 
-    # .html
+    # 1.html
+    {{foo}}
+    {{bar}}
+
+    # 2.html
     {{foo}}
     {{bar}}
 ```
@@ -114,8 +120,11 @@
 ### 自定义全局函数
 ```python
     @app.template_global()
-    def bar():
-        return 'this is bar'
+    def Global(a,b,c):
+        return a + b + c
+
+    # 1.html
+    # <p>全局函数global: {{ Global(1,4,5) }} </p>
 ```
 
 
@@ -268,4 +277,25 @@
     db.session.commit()
 ```
 
+### 执行mysql语句
+```python
+from sqlalchemy import create_engine
 
+engine = create_engine('mysql+pymysql://root:qingtongsrv1@192.168.11.18:3306/zwy')
+db_session = scoped_session(sessionmaker(bind=engine))
+s = db_session()
+
+sql = "select * from wx_user where wx_id='{0}'".format(user_id)
+if s.execute(sql).fetchone(): return ''
+
+
+sql = "INSERT INTO wx_user (wx_id, nick_name, province, city) VALUES ('{0}','{1}','{2}','{3}')"
+sql = sql.format( user_id, user_info['nickName'], user_info['province'], user_info['city'] )
+s.execute(sql)
+s.commit()
+
+# 或者
+from sqlalchemy import text
+result = db.execute(text('select * from table where id < :id and typeName=:type'), {'id': 2,'type':'USER_TABLE'})
+   
+```

@@ -25,7 +25,7 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 
 `apt-get` 是ubuntu下的一个软件安装方式，基于debain。
 
----  
+------  
 
 ```bash
     tar -cvf Python-3.5.4.tgz  // 生成 Python-3.7.1 文件夹
@@ -133,7 +133,12 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 5.  `npm install -g jshint`  全局安装后可以使用了，大功告成~~
 
 
----
+### 使用forever让nodejs后台运行
+> * `npm install forever -g`
+> * `forever start app.js` #启动 app.js 
+> * `forever stop app.js` #关闭 app.js  
+
+
 ---
 
 # 知识点
