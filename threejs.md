@@ -154,6 +154,13 @@ scene.add( group );
     VertexColors: 定义线条材质是否使用顶点颜色，boolean值
 */
 
+ /**
+  * 物体能够接受阴影的材质有：
+  * MeshLambertMaterial, MeshPhongMaterial, MeshPhysicalMaterial, MeshToonMaterial, RawShaderMaterial, ShadowMaterial
+  * 
+  * 
+ */
+
 ```
 
 ------
@@ -169,7 +176,6 @@ THREE.PointLight // 点光源
 ```
 
 ### 纹理
-
     文理类:
     THREE.Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)
 

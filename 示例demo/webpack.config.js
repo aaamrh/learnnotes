@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
               use:{
                 loader:'babel-loader',
                 options:{
-                  preset:[
+                  presets:[
                     '@babel/preset-env'
                   ]
                 }
@@ -110,6 +111,10 @@ module.exports = {
             "window.jQuery": "jquery'",
             "window.$": "jquery"
         }),
+        new webpack.HotModuleReplacementPlugin(), // 热更新，热更新不是刷新
+        new CopyWebpackPlugin([
+            {from:'./static/models', to:'models'} // 拷贝到 ./dist目录下
+        ])
       
     ],
     optimization:{ // 优化项
@@ -132,7 +137,8 @@ module.exports = {
           new OptimizeCss()
         ]
     },
-    
+
+    // npm install webpack-dev-server --save-dev
     devServer: {
         inline:true,
         hot:true,
