@@ -5,11 +5,23 @@
 int x = 4;
 printf("x保存在 %p\n", &x)
 
-// address_of_x 是x的地址， *address_of_x 是x地址中的值
-int *address_of_x = &x;
+
+// foo是x的地址， *foo是x地址中的值
+int *foo = &x;  // 或者 int *foo;  foo=&x;
+printf("%s \n", *foo);
+
+char cc[15] = "maruihua";
+char *s = &cc;  // *s=cc；也会输出 -> maruihua
+printf("%s \n", s);
+
 
 // 修改地址中的值
-*address_of_x = 10;
+*foo = 10;
+
+void foo(char a[]){
+    printf("%d %s %d\n", sizeof(a), a, strlen(a));  // sizeof(a) 返回的是指针变量的大小
+}
+foo(cc)     // -> 4 maruihua 8  
 ```
 
 ```cpp
@@ -35,7 +47,6 @@ int *address_of_x = &x;
 
   char name[40];
   scanf("%39s", name);  // 输入39个字符 (+ '\0')
-
 ```
 
 > 在 scanf 里 \n 很特别的,不是要求输入一个回车换行
@@ -47,3 +58,28 @@ int *address_of_x = &x;
 > 你输入一个数后，它是不会立即显示的，要等再接收到一个非（空格、制表符、回车）的输入 scanf 语句才结束。
 >
 > 但请注意的是，最后输入的那个非（空格、制表符、回车）的东西是不会被这个 scanf 读进来的，而是留在输入流里
+
+
+### string.h
+``` C
+strcmp()    // 比较字符串
+strchr()    // 在字符串中查找字符
+strstr()    // 在字符串中查找字符串
+strcpy()    // 复制字符串
+strlen()    // 返回字符串长度
+strcat()    // 链接字符床
+```
+
+
+#### string 
+```C
+char song[][100] = {
+    "There's a girl but I let her get away",
+    "It's all my fault cause pride got the way",
+    "..."
+};
+
+printf("%d\n", sizeof(song)/sizeof(char));    // song 的大小  300
+printf("%d\n", sizeof(song[0])/sizeof(char)); // song 的列数  100
+printf("%d\n", (sizeof(song)/sizeof(char)) / (sizeof(song[0])/sizeof(char)) ); // song 的行数 3
+```

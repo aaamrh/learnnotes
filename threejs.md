@@ -268,6 +268,28 @@ setFromCamera:function(coords, camera)
 
 /* 哪些对象和他相交 */
 intersectObject: function(objects, recursive){}
+```
 
+### 着色漆
+``` javascript
+<script id="vertexShader"  type="x-shader/x-vertex"> 
+    void main(){
+        gl_Position = vec4(position, 1.0);
+    }
+</script>
+
+<script id="fragmentShader"  type="x-shader/x-fragment">
+    void main(){
+        gl_FragColor = vec4(1.0, 0, 0, 1.0)  // 红色
+    }
+</script>
+
+<script>
+    var material = new THREE.ShaderMaterial({
+        vertexShader: document.getElementById('vertexShader').textContent;
+        fragmentShader  : document.getElementById('fragmentShader').textContent;
+
+    })
+</script>
 
 ```
