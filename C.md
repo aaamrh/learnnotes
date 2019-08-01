@@ -14,12 +14,12 @@ printf("x保存在 %p\n", &x)
     * ：取值
     *foo: 取 foo 指向的地址中的值
 */
-int *foo = &x;  // 或者 int *foo;  foo=&x;
+int *foo = &x;              // 或者 int *foo;  foo=&x;
 printf("%d, %p, %p \n", *foo, &foo, foo);
 
 
 char cc[15] = "maruihua";
-char *s = &cc;  // *s=cc；也会输出 -> maruihua
+char *s = &cc;              // *s=cc；也会输出 -> maruihua
 printf("%s \n", s);
 
 
@@ -29,7 +29,7 @@ printf("%s \n", s);
 void foo(char a[]){
     printf("%d %s %d\n", sizeof(a), a, strlen(a));  // sizeof(a) 返回的是指针变量的大小
 }
-foo(cc)     // -> 4 maruihua 8  
+foo(cc)                     // -> 4 maruihua 8  
 ```
 
 ```cpp
