@@ -23,3 +23,10 @@
 	conda clean -t      //tar打包
 	
 ```
+
+### TensorFlow基础知识
+#### 数据类型
+``` python
+	// list
+	[1, 1.2, "hello", (1,2), 类]
+```
