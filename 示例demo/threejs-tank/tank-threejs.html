@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>tank</title>
+  <style>
+      body {
+      margin: 0;
+      }
+      #c {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+      #info {
+        position: absolute;
+        left: 1em;
+        top: 1em;
+        background: rgba(0,0,0,.8);
+        padding: .5em;
+        color: white;
+        font-family: monospace;
+      }
+    </style>
+</head>
+<body>
+  <div id="c"></div> 
+  <div id="info"></div>
+
+
+  <script src="../../libs/three105.min.js"></script>
+  <script>
+    function main(){
+      const canvas  = document.querySelector("#c");
+      const renderer = new THREE.WebGLRenderer({ antialias:true });
+      renderer.setClearColor(0xAAAAAA);
+      renderer.setSize(window.innerWidth, window.innerHeight, false);
+      renderer.shadowMap.enabled = true;
+      canvas.appendChild(renderer.domElement); 
+      window.addEventListener('resize', onWindowResize);
+
+      const camera = makeCamera();
+      camera.position.set(8, 4, 10).multiplyScalar(5);
+      camera.lookAt(0,0,0);
+
+      const scene = new THREE.Scene();
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(0, 20, 0);
+      light.castShadow = true;
+      scene.add(light);
+
+      const groundGeometry = new THREE.PlaneBufferGeometry(50, 50);
+      const groundMaterial = new THREE.MeshPhongMaterial({color: 0xcccccc});
+      const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+      groundMesh.rotation.x = Math.PI * -0.5;
+      groundMesh.receiveShadow = true;
+      scene.add(groundMesh)
+
+      // create tank
+      const tank = new THREE.Object3D();
+      scene.add(tank);
+
+      const carWidth = 4,
+        carHeight = 1,
+        carLength = 8;
+    
+      const bodyGeometry = new THREE.BoxBufferGeometry(carWidth, carHeight, carLength);
+      const bodyMaterial = new THREE.MeshPhongMaterial({color: 0x6688AA});
+      const bodyMesh = new THREE.Mesh(bodyGeometry, bodyMaterial);
+      bodyMesh.position.y = 1.4;
+      bodyMesh.castShadow = true;
+      tank.add(bodyMesh);
+
+      const tankCamera = makeCamera(75);
+      tankCamera.position.y = 3;
+      tankCamera.position.z = -6;
+      tankCamera.rotation.y = Math.PI;
+      bodyMesh.add(tankCamera);
+
+      const bodyHelper = new THREE.AxesHelper(10);
+      bodyHelper.position.copy(bodyMesh.position);
+      scene.add(bodyHelper)
+
+      // 轮子
+      const wheelRadius = 1;
+      const wheelThickness = .5;
+      const wheelSegments = 6;
+      const wheelGeometry = new THREE.CylinderBufferGeometry(
+        wheelRadius,
+        wheelRadius,
+        wheelThickness,
+        wheelSegments );
+      const wheelMaterial = new THREE.MeshPhongMaterial({color:0x888888})
+      const wheelPositions = [
+        [-carWidth / 2 - wheelThickness / 2, -carHeight / 2,  carLength / 3],
+        [ carWidth / 2 + wheelThickness / 2, -carHeight / 2,  carLength / 3],
+        [-carWidth / 2 - wheelThickness / 2, -carHeight / 2, 0],
+        [ carWidth / 2 + wheelThickness / 2, -carHeight / 2, 0],
+        [-carWidth / 2 - wheelThickness / 2, -carHeight / 2, -carLength / 3],
+        [ carWidth / 2 + wheelThickness / 2, -carHeight / 2, -carLength / 3],
+      ];
+      const wheelMeshes = wheelPositions.map((pos)=>{
+        const mesh = new THREE.Mesh(wheelGeometry, wheelMaterial)
+        mesh.position.set( ...pos );
+        mesh.rotation.z = Math.PI * .5;
+        mesh.castShadow = true;
+        bodyMesh.add(mesh);
+        return mesh;
+      }) 
+
+
+      const domeRadius = 2;
+      const domeWidthSubdivisions = 12;
+      const domeHeightSubdivisions = 12;
+      const domePhiStart = 0;
+      const domePhiEnd = Math.PI * 2;
+      const domeThetaStart = 0;
+      const domeThetaEnd = Math.PI * .5;
+      const domeGeometry = new THREE.SphereBufferGeometry(
+        domeRadius, domeWidthSubdivisions, domeHeightSubdivisions,
+        domePhiStart, domePhiEnd, domeThetaStart, domeThetaEnd);
+      const domeMesh = new THREE.Mesh(domeGeometry, bodyMaterial)
+      domeMesh.castShadow = true;
+      bodyMesh.add(domeMesh);
+      domeMesh.position.y = .5;
+
+      // 炮筒
+      const turretWidth = .1;
+      const turretHeight = .1;
+      const turretLength = carLength *.75 * .2;
+      const turretGeometry = new THREE.BoxBufferGeometry(turretWidth, turretHeight, turretLength);
+      const turretMesh = new THREE.Mesh(turretGeometry, bodyMaterial);
+      const turretPivot = new THREE.Object3D();
+      turretMesh.castShadow = true;
+      turretPivot.scale.set(5,5,5);
+      turretPivot.position.y = .5;
+      turretMesh.position.z = turretLength * .5;
+      turretPivot.add(turretMesh);
+      bodyMesh.add(turretPivot);
+
+      const turretCamera = new makeCamera();
+      turretCamera.position.y = .1;
+      turretMesh.add(turretCamera);
+
+      // 目标物体
+      const targetGeometry = new THREE.SphereBufferGeometry(.5, 6, 3);
+      const targetMesh = new THREE.Mesh(targetGeometry, bodyMaterial);
+      targetMesh.castShadow = true;
+      targetMesh.position.z = carLength * 2;
+      targetMesh.position.y = 8;
+      const targetOrbit = new THREE.Object3D();
+      targetOrbit.add(targetMesh)
+      scene.add(targetOrbit);
+
+
+      const targetCamera = makeCamera();
+      // targetCamera.position.y = 1;
+      // targetCamera.position.z = -2;
+      // targetCamera.rotation.y = Math.PI;
+      targetMesh.add(targetCamera);
+
+      const turretHelper = new THREE.AxesHelper(5);
+      turretHelper.position.copy(targetMesh.position);
+      targetOrbit.add(turretHelper);
+
+      // path
+      const curve = new THREE.SplineCurve([
+        new THREE.Vector2( -10, 0 ),
+        new THREE.Vector2( -5, 5 ),
+        new THREE.Vector2( 0, 0 ),
+        new THREE.Vector2( 5, -5 ),
+        new THREE.Vector2( 10, 0 ),
+        new THREE.Vector2( 5, 10 ),
+        new THREE.Vector2( -5, 10 ),
+        new THREE.Vector2( -10, -10 ),
+        new THREE.Vector2( -15, -8 ),
+        new THREE.Vector2( -10, 0 ),
+      ])
+      const points = curve.getPoints(50);
+      const fooGeometry = new THREE.BufferGeometry().setFromPoints(points);
+      const fooMaterial = new THREE.LineDashedMaterial({color:0x00ff00});
+      const splineObject = new THREE.Line(fooGeometry, fooMaterial)
+      splineObject.rotation.x = Math.PI * .5;
+      splineObject.position.y = 0.05;
+      scene.add(splineObject);
+
+      // 
+      const targetPosition = new THREE.Vector3();
+      const tankPosition = new THREE.Vector2();
+      const tankTarget = new THREE.Vector2();
+
+      const cameras = [
+        { cam: camera, desc: 'detached camera', },
+        { cam: turretCamera, desc: 'on turret looking at target', },
+        { cam: targetCamera, desc: 'near target looking at tank', },
+        { cam: tankCamera, desc: 'above back of tank', },
+      ];
+
+      const info = document.querySelector('#info');
+
+      //
+      function onWindowResize(){
+        camera.aspect = window.innerWidth/window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function makeCamera(fov = 40){
+        return new THREE.PerspectiveCamera(fov, window.innerWidth/window.innerHeight, 0.1, 1000);
+      }
+
+      function render(time){
+        // console.log(time)
+        time *= .001;
+        // console.log(time)
+        // console.log('------------------------------')
+
+        // move target
+        targetOrbit.rotation.y = time * 1;
+        targetOrbit.position.y = Math.sin(time * 3) * 2;
+
+        /** 
+         *  move tank
+         *  个人理解： getPointAt(u, pos)
+         *  u: 取值范围[0-1]
+         *  curve.getPointAt(.1, pos):  获取curve曲线 10% 位置处的坐标点，赋值给pos
+         *  循环 获取 0-1 坐标点可以让物体在曲线上的循环运动   
+        */
+        const tankTime = time * .05;
+        curve.getPointAt( tankTime%1, tankPosition);
+        curve.getPointAt( (tankTime+0.00001)%1, tankTarget );
+        tank.position.set(tankPosition.x, 0, tankPosition.y);
+        tank.lookAt(tankTarget.x, 0, tankTarget.y);
+
+        /** 
+         *  face tueert at target
+         *  注意：
+         *  这里 targetMesh虽然在运动，但是targetMesh.position是固定不变的
+         *  需要用 getWorldPosition 获取在3D世界中的坐标点
+        */
+        targetMesh.getWorldPosition(targetPosition);
+        turretPivot.lookAt(targetPosition);
+
+        turretCamera.lookAt(targetPosition);
+
+        tank.getWorldPosition(targetPosition);
+        targetCamera.lookAt(targetPosition);
+
+        wheelMeshes.forEach((obj) => {
+          obj.rotation.x = time * 2;
+        });
+
+
+        // 位运算 | ：   1.9 | 0  -> 1  取整
+        const camera = cameras[time * .25 % cameras.length | 0];
+        info.textContent = cameras.desc;
+
+
+        renderer.render(scene, camera.cam);
+        // targetCamera.lookAt(0,0,0)
+        requestAnimationFrame(render);
+      }
+
+      render(1);
+    }
+
+    main()
+
+  
+  
+  </script>
+</body>
+</html>
