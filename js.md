@@ -347,6 +347,31 @@ if (window.XMLHttpRequest) {
   xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 }
 
+// 上传文件进度条
+xmlhttp.upload.onprogress = function(event) {
+  if (event.lengthComputable) {
+    console.log(`上传进度为: ${event.loaded} of ${event.total} bytes`);
+  }
+};
+
+// 请求错误处理
+xmlhttp.onerror = function(){};
+
+// 当一个HTTP请求正确加载出内容后返回时调用。
+xmlhttp.onload = function(){}
+
+// 当一个HTTP请求开始加载数据时调用
+xmlhttp.onloadstart = function(){}
+
+// 当内容加载完成，不管失败与否，都会调用该方法
+xmlhttp.onloadend = function(){}
+
+// 间歇调用该方法用来获取请求过程中的信息
+xmlhttp.onprogress = function(){}
+
+// 当时间超时时调用；只有通过设置XMLHttpRequest对象的timeout属性来发生超时时，这种情况才会发生
+xmlhttp.ontimeout = function(){}
+
 xmlhttp.onreadystatechange = function(){
   if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
     var data = xmlhttp.response;
@@ -357,8 +382,9 @@ xmlhttp.open("GET","");
 // 实时的读取JSON文件时，因为在浏览器中会有缓存，所以设置请求头
 xmlhttp.setRequestHeader("Cache-Control","no-cache");
 xmlhttp.send();
+
+
 // 跨域请求 jsonP
-			 
   <scripts>
     function callback(data){ alert(data) }
   </scripts>
@@ -366,6 +392,7 @@ xmlhttp.send();
   <scripts src=`2.txt`></scripts>
 
 // 文件2.txt: callback([1,2,3])
+
 
 // 向后台传输数据（ POST方法发送数据）
 var sendData = { 'name':'bob' };
@@ -376,6 +403,7 @@ data_json=request.get_data().decode('utf-8')
 data_dict=json.loads(data_json)
 
 ```
+
 
 ### **JS快速解析URL**
 ``` javascript
@@ -446,7 +474,7 @@ Foo.prototype = {
 }
 
 var foo = new Foo('bob');
-```
+``` javascript
     区别1：
     利用 this 实现的公共方法中可以访问类的私有成员(用 var 声明的变量)，私有方法(用 function 直接定义的方法)； 
     利用原型扩展实现的方法中，无法调用私有成员和变量。 
