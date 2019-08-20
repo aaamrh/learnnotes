@@ -124,6 +124,36 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
    3. `db.shutdownServer()`  或者 `db.adminCommand( { shutdown: 1 } )`
 6. 创建用户后登录方式： `mongo --port 27017`, `use database` , `db.auth('marh', '123123')`
 
+```
+	use admin
+ 
+	# 创建管理员用户，并指定其权限。
+	db.createUser({
+	  user : 'root',
+	  pwd : '123456',
+	  roles : [
+		'clusterAdmin',
+		'dbAdminAnyDatabase',
+		'userAdminAnyDatabase',
+		'readWriteAnyDatabase'
+	  ]
+	})
+	
+	# 重启MongoDB服务并加上--auth参数
+	# ./mongod --dbpath=/data/db/mongo/ --logpath=/data/db/mongo/log --logappend  --port=27017 --fork --auth
+	
+	
+	# 创建用户。
+	db.createUser({
+		"user":"",
+		"pwd":"",
+		roles:[
+			{"role":"readWrite", "db":"maBlog"}
+		]
+	})
+
+```
+
 
 ### `CentOS7 npm全局安装成功，使用提示 Command not found`
 1.  `mkdir ~/.npm-global`
