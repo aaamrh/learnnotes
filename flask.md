@@ -341,6 +341,4 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
         })
     </script>
 ```
-
-
 ------

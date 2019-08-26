@@ -1,3 +1,4 @@
+# pymysql
 1.
 	conn = pymysql.connect(host="127.0.0.1", port=3306, user="root", password="root")
         
@@ -9,3 +10,22 @@
 	cmd = "mysql -uroot -root -e 'source ./temp.sql'" 
 	os.system(cmd)
 	os.popen(cmd)
+	
+	
+--------
+# mysql
+一、mysql清空表数据后如何让自增ID仍从1开始
+
+1. 清空表时使用truncate命令，而不用delete命令
+		truncate test;
+	使用truncate命令的好处：
+		1) 速度快
+		2) 可以对自增ID进行重排，使自增ID仍从1开始计算
+2. 清空表数据后，使用alter修改表
+		格式： alter table table_name auto_increment=1;
+3. 修改表
+	(1)	修改表->字段信息
+	alter table ‘table_name’ modify ‘field’ char(16);
+	(2)	修改表->增加字段
+	alter table ‘table_name’ add ‘field’ ... ...	
+4. 
