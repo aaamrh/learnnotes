@@ -77,13 +77,13 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
     1. npm install forever -g
     
         完成后截图：
-        ![阿里云安全组配置]()
+        ![阿里云安全组配置](https://github.com/aaamrh/learnnotes/blob/master/images/service/node-path1.png)
 
     2. 安装完成后，在控制台输入 forever 提示 `-bash: forever: command not found`
     3. 添加环境变量
         
         执行命令 `vim /etc/profile`
-        ![添加环境变量]()
+        ![添加环境变量](https://github.com/aaamrh/learnnotes/blob/master/images/service/node-path2.png)
 
     4. 修改后保存，更新配置文件`source /etc/profile`, 大功告成 ！！！
 
