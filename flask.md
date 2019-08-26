@@ -297,5 +297,50 @@ s.commit()
 # 或者
 from sqlalchemy import text
 result = db.execute(text('select * from table where id < :id and typeName=:type'), {'id': 2,'type':'USER_TABLE'})
-   
 ```
+
+-------
+### WebSocket
+``` python 
+    # app.py
+    from flask import Flask, render_template
+    from flask_socketio import SocketIO, emit
+
+    socketio = SocketIO()
+
+
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'secret string'
+    socketio.init_app(app)
+
+
+    @app.route('/')
+    def index():
+    return render_template('index.html')
+
+
+    @socketio.on('new message')
+    def new_message(message_body):
+    print(message_body)
+    emit('aaa', '我是服务器aaa的数据')
+
+```
+
+``` html
+    <!-- index.html -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+        var socket = io();
+        
+        setInterval(function(){
+        socket.emit('new message', 'hahahahahahah'); 
+        }, 1000)
+
+        socket.on('aaa', function(data){
+        console.log(data)
+        })
+    </script>
+```
+
+
+------
