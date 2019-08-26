@@ -66,13 +66,30 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 - -t 表示查看文件，查看文件中的文件内容
 - -z 调用gzip程序来压缩文件，压缩后的文件名称以.gz结尾。
   
-### 安装nodejs
 
+--------------  
+### 安装nodejs
 1. 下载nodejs: `wget https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz`
 2. 解压: `tar -xvf node-v10.15.3-linux-x64.tar.xz`]
 3. 建立软连: `ln -s <路径>/bin/node /usr/local/bin/node` ( npm | npx )
+    #### npm 全局安装成功后，执行命令报错
+    > linux中，`npm install forever -g` 全局安装pm2后，执行 pm2 提示 `-bash: forever: command not found`
+    1. npm install forever -g
+    
+        完成后截图：
+        ![阿里云安全组配置]()
+
+    2. 安装完成后，在控制台输入 forever 提示 `-bash: forever: command not found`
+    3. 添加环境变量
+        
+        执行命令 `vim /etc/profile`
+        ![添加环境变量]()
+
+    4. 修改后保存，更新配置文件`source /etc/profile`, 大功告成 ！！！
 
 
+
+-----------
 ### 安装git
 1. `yum -y install git`
 2. 第一次使用git需要设置 ssh
@@ -80,6 +97,7 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
     2. 将 `~/.ssh/id_rsa.pub` 中的秘钥添加到github中的SSH keys中。
 
 
+----------
 ### Nginx
 1. 启动: `cd /usr/local/nginx/sbin` ,    `./nginx`
 2. 查看运行状态: `ps aux|grep nginx`
@@ -102,6 +120,7 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 ![阿里云安全组配置](https://github.com/aaamrh/learnnotes/blob/master/images/service/%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E5%85%A8%E7%BB%84%E9%85%8D%E7%BD%AE.png)
 
 
+------------------
 ### 安装配置mongodb
 1. 新建文件： `touch /etc/yum.repos.d/mongodb-org-4.0.repo` 更多见：[Mongodb其他版本安装教程](https://docs.mongodb.com/manual/administration/install-on-linux/)
 ```
@@ -169,8 +188,7 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 > * `forever stop app.js` #关闭 app.js  
 
 
----
-
+------
 # 知识点
 ### **centOS7防火墙：iptables**
 > 是centos7 默认使用的防火墙是Firewall，要先把Firewall 关闭再使用iptables

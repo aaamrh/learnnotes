@@ -321,7 +321,7 @@ xmlhttp.setRequestHeader("Cache-Control","no-cache");
 xmlhttp.send();
 
 
-### **去除字符串空格**
+### **正则**
 ``` js
 // 去除所有空格:   
 str   =   str.replace(/\s+/g,"");   
@@ -334,6 +334,14 @@ str   =   str.replace( /^\s*/, '');
 
 // 去除右空格：
 str   =   str.replace(/(\s*$)/g, "");
+
+// 替换html标签
+html.replace(/(\<p\>|\<\/p\>)/g, function($0, $1){
+	return {
+		"<p>":'',
+		"</p>":''
+	}
+})
 
 ```
 ### **Ajax**
