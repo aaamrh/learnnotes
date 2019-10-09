@@ -175,6 +175,32 @@ THREE.SpotLight // 聚光灯
 THREE.PointLight // 点光源
 ```
 
+#### 方向光 DirectionalLight
+``` javascript
+	initLight(){
+		scene.add(new THREE.AmbientLight(0x666666));
+
+		light = new THREE.DirectionalLight( 0xdfebff, 1 );
+		light.position.set( 10, 50, 10 );
+		light.castShadow = true;
+		light.shadow.mapSize.width = 1024;
+		light.shadow.mapSize.height = 1024;
+		var d = 50;
+		light.shadow.camera.far = 10000;
+		light.shadow.camera.near = 0;
+		light.shadow.camera.left = - d;
+		light.shadow.camera.right = d;
+		light.shadow.camera.top = d;
+		light.shadow.camera.bottom = - d;
+		scene.add( this.light );
+		
+		// 用来模拟相机锥视体
+		const debug = new THREE.CameraHelper(this.light.shadow.camera);
+		debug.name = "debug";
+		scene.add(debug);
+	  }
+```
+
 ### 纹理
     文理类:
     THREE.Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)
@@ -270,7 +296,7 @@ setFromCamera:function(coords, camera)
 intersectObject: function(objects, recursive){}
 ```
 
-### 着色漆
+### 着色器
 ``` javascript
 <script id="vertexShader"  type="x-shader/x-vertex"> 
     void main(){
@@ -292,4 +318,30 @@ intersectObject: function(objects, recursive){}
     })
 </script>
 
+```
+
+### OBJ模型投影
+``` javascript
+	 function initCar(){
+      var geometry, material;
+      var loader = new THREE.MTLLoader();
+      loader.setPath('../3d-models/');
+      loader.load('car.mtl', function(material){
+        material.preload();
+
+        let objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(material);
+        objLoader.load('../3d-models/car.obj', function(obj){
+
+          for(k in obj.children){
+            obj.children[k].castShadow = true;
+            obj.children[k].receiveShadow = true;
+          }
+          // obj.receiveShadow = true;      // 这种方式没有效果，只适用于 geometry 模型
+          // obj.castShadow = true;         // 这种方式没有效果，只适用于 geometry 模型
+
+          scene.add(obj);
+        })
+      })
+    }
 ```
