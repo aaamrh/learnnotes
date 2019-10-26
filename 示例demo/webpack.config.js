@@ -44,7 +44,16 @@ module.exports = {
                     //     }
                     // },
                     'css-loader',
-                    'postcss-loader'             //  会调用 postcss.config.js
+                    'postcss-loader',             //  会调用 postcss.config.js
+					/** 如果没有 postcss.config.js
+					 * {
+					 *    loader: 'postcss-loader',
+					 *    options: {
+					 *	     plugins: (loader) => [ require('autoprefixer')(),  // css浏览器兼容 ]
+					 *    }
+					 * }
+					 **/
+					
                 ]
             },
             {
@@ -114,7 +123,11 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(), // 热更新，热更新不是刷新
         new CopyWebpackPlugin([
             {from:'./static/models', to:'models'} // 拷贝到 ./dist目录下
-        ])
+        ]),
+		new MiniCssExtractPlugin({
+		    filename: "[name].css",
+		    chunkFilename: "[id].css"
+		}),
       
     ],
     optimization:{ // 优化项
