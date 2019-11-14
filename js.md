@@ -627,6 +627,13 @@ function extend(o1, o2){
   }
 ```
 
+### **好看的 conssole **
+
+``` javascript
+console.log('%c %c必须传入属性参数: prop', 'padding:2px 30px; background:url("https://www.qingtong123.com/static/images/nav-logo.png") no-repeat center/100% 100%;', 'color: black; background:yellow;padding:5px;');
+
+```
+
 ### **组件开发之自定义事件**
 ``` javascript
   var oDiv = document.getElementById('div1');
