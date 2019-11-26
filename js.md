@@ -653,7 +653,7 @@ console.log('%c %c必须传入属性参数: prop', 'padding:2px 30px; background
     //   click: [fn3, fn4]
     // }
 
-    obj.listener = obj.listener || {};                  
+    obj.listener = obj.listener || {}; 
     obj.listener[events] = obj.listener[events] || [];
     obj.listener[events].push(fn)
 

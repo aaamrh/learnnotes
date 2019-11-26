@@ -201,6 +201,7 @@ THREE.PointLight // 点光源
 ```
 
 ### 纹理
+    Box 皮肤渲染顺序： 右->左->上->下->前->后
     文理类:
     THREE.Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)
 
