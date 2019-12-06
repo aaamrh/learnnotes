@@ -61,7 +61,8 @@ def req():
 def login():
     print(request.form) # 格式 ImmutableMultiDict([('username', '123'), ('pwd', '123')])
     print(request.form.to_dict()) # 格式 {'username': '123', 'pwd': '123'}
-    return render_template("login.html")
+    print(request.form['data'])
+    print(request.form.getlist('checkbox')) # 获取checkbox的数据要用getlist
 
 
 # 接收文件
