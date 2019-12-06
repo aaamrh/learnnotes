@@ -38,6 +38,51 @@
         TESTING=True,
         SECRET_KEY='_5#yF4Q8z\n\xec]/'
     )
+#### request
+``` python
+form flask import request
+
+# 接收url中的参数
+@app.route("/req")
+def req():
+    print(request.method) #获取访问方式 GET
+    print(request.url) #获取url http://127.0.0.1:5000/req?id=1&name=wl
+    print(request.cookies) #获取cookies {}
+    print(request.path)  # 获取访问路径 /req
+    print(request.args) #获取url传过来的值  ImmutableMultiDict([('id', '1'), ('name', 'wl')])
+    print(request.args.get("id")) #get获取id  1
+    print(request.args["name"]) # 索引获取name wl
+    print(request.args.to_dict()) # 获取到一个字典 {'id': '1', 'name': 'wl'}
+
+    return "Hello"
+
+# 接收 form 表单参数
+@app.route("/login",methods=["POST","GET"])
+def login():
+    print(request.form) # 格式 ImmutableMultiDict([('username', '123'), ('pwd', '123')])
+    print(request.form.to_dict()) # 格式 {'username': '123', 'pwd': '123'}
+    return render_template("login.html")
+
+
+# 接收文件
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    my_file = request.files.get("my_file")  # 格式 ImmutableMultiDict([('my_file', <FileStorage: 'Chrysanthemum.jpg' ('image/jpeg')>)])
+    file_path = os.path.join("static", "1.jpg")
+    my_file.save(file_path)
+
+# 接收 json
+@app.route("/login", methods=["POST", "GET"])
+def login():
+   
+    print(request.data) # 存放的是请求体中的原始信息 Content-Type:无法识别的类型
+    print(request.json) # 请求头中存在 Content-Type:application/json 将请求体中的数据 存放在JSON中
+    print(request.values) # CombinedMultiDict([ImmutableMultiDict([]), ImmutableMultiDict([('username', '123'), ('pwd', '123'), ('my_file', '')])])
+    print(request.values.to_dict()) # 这是个坑!!!{'username': '123', 'pwd': '123', 'my_file': ''}
+
+```
+
+
 
 #### get
     url: http://localhost:5000/hello?name=Grey
