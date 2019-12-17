@@ -83,6 +83,42 @@ def login():
 
 ```
 
+### 下载文件
+``` python
+
+    # 普通下载文件方式
+    @app.route('/export_csv/')
+        def export_csv():
+        print('--------------')
+        f =  os.path.dirname(__file__)[0],  
+
+        print(f)
+
+        return send_from_directory(f, filename='推荐理财.docx', as_attachment=True)
+        # as_attachment=True 一定要写，不然会变成打开，而不是下载
+
+    # 流式读取
+    from flask import Response
+
+    def export_csv():
+        def send_file():
+            store_path = os.path.join( os.path.dirname(__file__), '推荐理财.docx' )
+            print(store_path)
+            with open(store_path, 'rb') as f:
+            while 1:
+                data = f.read(20 * 1024 * 1024)   # 每次读取20M
+                if not data:
+                break
+                yield data
+
+    response = Response(send_file(), content_type='application/octet-stream')
+    response.headers["Content-disposition"] = 'attachment; filename=%s' % '推荐理财.docx'.encode("utf-8").decode("latin1")  # 如果不加上这行代码，导致没有文件名，和文件格式
+
+    return response
+```
+**涉及到的错误：** `UnicodeEncodeError: 'latin-1' codec can't encode characters in position 42-45: ordinal not in range(256)`
+**起因：** 发现文件名有中文名字，　所以导致错误，　编码是latin-1编码， 所以我们需要解码成unicode在编码成latin-1
+**解决：** '推荐理财.docx'.encode("utf-8").decode("latin1")
 
 
 #### get
