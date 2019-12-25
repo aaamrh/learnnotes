@@ -323,25 +323,26 @@ xmlhttp.send();
 
 ### **正则**
 ``` js
-// 去除所有空格:   
-str   =   str.replace(/\s+/g,"");   
-    
-// 去除两头空格:   
-str   =   str.replace(/^\s+|\s+$/g,"");
+// 去除所有空格:
+str = str.replace(/\s+/g, "");
+
+// 去除两头空格:
+str = str.replace(/^\s+|\s+$/g, "");
 
 // 去除左空格：
-str   =   str.replace( /^\s*/, '');
+str = str.replace(/^\s*/, '');
 
 // 去除右空格：
-str   =   str.replace(/(\s*$)/g, "");
+str = str.replace(/(\s*$)/g, "");
 
 // 替换html标签
 html.replace(/(\<p\>|\<\/p\>)/g, function($0, $1){
 	return {
 		"<p>":'',
 		"</p>":''
-	}[1]
+	}[$1]
 })
+
 
 ```
 ### **Ajax**

@@ -69,8 +69,8 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 
 --------------  
 ### 安装nodejs
-1. 下载nodejs: `wget https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz`
-2. 解压: `tar -xvf node-v10.15.3-linux-x64.tar.xz`]
+1. 下载nodejs: `wget https://nodejs.org/dist/v12.14.0/node-v12.14.0-linux-x64.tar.xz`
+2. 解压: `tar -xvf node-v12.14.0-linux-x64.tar.xz`]
 3. 建立软连: `ln -s <路径>/bin/node /usr/local/bin/node` ( npm | npx )
     #### npm 全局安装成功后，执行命令报错
     > linux中，`npm install forever -g` 全局安装pm2后，执行 pm2 提示 `-bash: forever: command not found`
