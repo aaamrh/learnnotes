@@ -255,6 +255,8 @@ module.exports = {
  * npm i html-withimg-loader -D
  * devtool: "source-map" // 会生成一个sourcemap文件，出错会标识错误的位置
  * devtool: "eval-source-map"  不会生成文件，但是可以显示 行和列
+ * 推荐 cheap-module-eval-source-map  // 开发环境配置
+ * 线上不推荐开启，会让人看见源码 cheap-module-source-map // 线上生成配置
  * 
  * module.exports = {
  *      entry:{}

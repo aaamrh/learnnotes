@@ -261,7 +261,23 @@ def login():
 ```
 
 ### 链接数据库
-```sql
+``` python
+    # 安装 pip install pymysql flask-sqlalchemy
+
+    import pymysql
+    from flask_sqlalchemy import SQLAlchemy
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://username:pwd@host/dbname')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+
+
+
+```
+
+
+### 链接数据库出现的错误
+``` sql
     -- mysql8.0 版本之后1130解决方案
     CREATE USER 'marh'@'%' IDENTIFIED BY 'password';
 
@@ -280,6 +296,44 @@ def login():
     ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; -- 更新用户密码
 
     FLUSH PRIVILEGES; -- 刷新权限
+```
+
+### flask-sqlalchemy
+``` python
+    # 创建模型
+    class Users(db.Model):
+        id = db.Column(db.Integer, primary_key = True)
+        uname = db.Column(db.String(20), unique=True, nullable=False)
+        
+```
+
+### Session
+```python
+	from flask import session
+	
+	# 设置session
+	session['username'] = 'aaamrh'
+
+	# 读取session
+	result = session[‘key’]     # 如果内容不存在，将会报异常
+	result = session.get(‘key’) # 如果内容不存在，将返回None
+	
+	# 删除session
+	session.pop('username')
+	
+	# 清除session中的所有数据
+	session.clear()
+	
+	# 设置session的过期时间
+	# 如果没有指定session的过期时间，那么默认是浏览器关闭后就自动结束
+	# 如果设置了session的permanent属性为True，那么过期时间是31天。
+	session.permanent = True
+	
+	# 设置有效期限
+	from datetime import timedelta
+	app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7) # 配置7天有效 
+	app.permanent_session_lifetime = timedelta(minutes=10)       # 10分钟有效期
+
 ```
 
 ### python shell CURD
@@ -384,17 +438,17 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
 -------
 ### WebSocket
 ``` python 
+    # pip install Flask-SocketIO
+    # 注意：不可用在开发环境 development
     # app.py
     from flask import Flask, render_template
     from flask_socketio import SocketIO, emit
 
     socketio = SocketIO()
 
-
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secret string'
     socketio.init_app(app)
-
 
     @app.route('/')
     def index():
@@ -403,8 +457,8 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
 
     @socketio.on('new message')
     def new_message(message_body):
-    print(message_body)
-    emit('aaa', '我是服务器aaa的数据')
+        print(message_body)
+        emit('aaa', '我是服务器aaa的数据')
 
 ```
 
@@ -415,11 +469,11 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
         var socket = io();
         
         setInterval(function(){
-        socket.emit('new message', 'hahahahahahah'); 
+            socket.emit('new message', 'hahahahahahah');
         }, 1000)
 
         socket.on('aaa', function(data){
-        console.log(data)
+            console.log(data)
         })
     </script>
 ```

@@ -1,4 +1,4 @@
-* [JS半知半解](#JS半知半解)
+* [JS半知半解](#js半知半解)
   * [map()](#map())
   * [事件代理](#事件代理)
   * [快速删除node_modules](#快速删除node_modules)
@@ -408,8 +408,13 @@ var sendData = { 'name':'bob' };
 xmlhttp.send( JSON.stringify(sendData) );
 
 // Flask 获取前台ajax传输的数据
+// request.data 和 request.get_data() 都是bytes类型，需要转换类型
 data_json=request.get_data().decode('utf-8')
 data_dict=json.loads(data_json)
+
+// 或者设置请求头
+xhr.setRequestHeader('Content-Type', 'application/json')
+data = request.get_json()  // ->  <class 'dict'>
 
 ```
 
