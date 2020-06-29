@@ -25,10 +25,29 @@ module.exports = {
               use:{
                 loader:'babel-loader',
                 options:{
-                  presets:[
-                    '@babel/preset-env'
-                  ]
-                }
+                  // presets:[ '@babel/preset-env' ]
+                  presets:[ ['@babel/preset-env', {
+					  targets:{
+						 edge: "17",
+						 firefox: "60",
+						 chrome: "67",
+						 safari: "11.1",
+						 android: "4.0"
+					  },
+					  corejs: 2, 
+					  useBuiltIns: "usage"
+				  }] ],
+				  plugins: [
+					"@babel/plugin-transform-runtime",
+					{
+						absoluteRuntime: false,
+						corejs: false,
+						helpers: true,
+						regenerator: true,
+						useESModules: false
+					}
+				  ]
+                } 
               },
               include:path.resolve(__dirname, "app/static/js", "app/static/libs"),
               exclude:/node_modules/
@@ -120,7 +139,7 @@ module.exports = {
             "window.jQuery": "jquery'",
             "window.$": "jquery"
         }),
-        new webpack.HotModuleReplacementPlugin(), // 热更新，热更新不是刷新
+        new webpack.HotModuleReplacementPlugin(), // 热更新，webpack自带，不支持抽离出来的css热更新，还有contenthash, chunkhash   
         new CopyWebpackPlugin([
             {from:'./static/models', to:'models'} // 拷贝到 ./dist目录下
         ]),
@@ -155,11 +174,17 @@ module.exports = {
     devServer: {
         inline:true,
         hot:true,
-        contentBase: path.resolve(__dirname, 'dist'),
+		hotOnly: true, // 浏览器不会帮助我们在修改代码后自动刷新
+        contentBase: path.resolve(__dirname, 'dist'), // 解析静态资源的目录
         host: 'localhost',
         port: 9090,
         compress: true,
-        progress: true
+        progress: true,
+		proxy: { 
+			"/api":{
+				target: "http://192.168.11.12:8000"
+			}
+		}
     },
 
     // watch:true,            //不可与 devServer同时存在
@@ -206,9 +231,20 @@ module.exports = {
 */
 
 
-// ES6转ES5
+// babel
 /** 
+ * ES6转ES5
  * npm install babel-loader@8.0.0-beta.0 @babel/core @babel/preset-env
+ *
+ * 解决 es6 转化 成es5后不能再低版本浏览器的问题
+ * npm i -S @babel/polyfill
+ * 可以再入口文件顶部引入 import "@babel/polyfill"; 但是会导致打包后的体积会很大。可以设置 useBuiltIns: "usage" 代替文件引入的方式。
+ * 
+ * 缺点：polyfill 是以全局变量的方式注入进来的, 会造成全局对象的污染. 因此想开发第三方的库，并开源的时候就不推荐使用 polyfill
+ * 
+ * 使用 @babel/plugin-transform-runtime 来解决polyfill的缺点
+ * npm i --save-dev @babel/plugin-transform-runtime // 拓展
+ * npm i -S @babel/runtime // 核心
  * 
 */
 
