@@ -21,22 +21,27 @@ module.exports = {
     module:{
         rules:[
             {
-              test:/\.js$/,
+              test:/\.js|jsx$/,
               use:{
                 loader:'babel-loader',
                 options:{
                   // presets:[ '@babel/preset-env' ]
-                  presets:[ ['@babel/preset-env', {
-					  targets:{
-						 edge: "17",
-						 firefox: "60",
-						 chrome: "67",
-						 safari: "11.1",
-						 android: "4.0"
-					  },
-					  corejs: 2, 
-					  useBuiltIns: "usage"
-				  }] ],
+                  presets:[ 
+                    [
+                      '@babel/preset-env', {
+					    targets:{
+						  edge: "17",
+						  firefox: "60",
+						  chrome: "67",
+						  safari: "11.1",
+						  android: "4.0"
+					    },
+					   corejs: 2, 
+					   useBuiltIns: "usage"
+                      }
+                    ],
+                    '@babel/preset-react'     // 如果写react
+                  ],
 				  plugins: [
 					"@babel/plugin-transform-runtime",
 					{
@@ -116,10 +121,12 @@ module.exports = {
   
     plugins:[
         new HtmlWebpackPlugin({
+            title: "base",  // 需要再html title 中使用 ejs 语法，<%= htmlWebpackPlugin.options.title%>
             filename: __dirname + '/app/templates/base.html',
             template: './src/base.html',
             chunks: [],
             inject:'body',
+            favicon: path.resolve('favicon.ico'),
             minify:{
               removeAttributeQuotes:true,  // 去除双引号
               collapseWhitespace:true,  // html压缩成一行
