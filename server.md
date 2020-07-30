@@ -187,6 +187,52 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
 > * `forever start app.js` #启动 app.js 
 > * `forever stop app.js` #关闭 app.js  
 
+------
+
+## nginx React 在服务器上的配置
+``` nginx
+    
+    server{
+        listen 80;
+        server_name www.maruihua.cn;
+        location / {
+            root /home/marh/projects/react-flask/build;
+            try_files $uri /index.html;      # 解决页面访问不到react路由的问题
+            index index.html;
+        }
+        location /api {
+            rewrite  ^/api/(.*)$ /$1 break;  # 开发时, react 一般会在前面添加 /api 前缀, 需要用正则去掉, 否则后台也要添加 /api 前缀
+            proxy_pass http://127.0.0.1:5000;
+        }
+}
+```
+
+``` js
+    // setupProxy.js
+    const { createProxyMiddleware } = require('http-proxy-middleware');
+    module.exports = function(app) {
+        app.use(
+            createProxyMiddleware('/api',
+                {
+                    target: 'http://127.0.0.1:5000',
+                    changeOrigin: true,
+                    pathRewrite: {
+                    '/api': '',    // 后台不需要添加 /api
+                    }
+                }
+            )
+        );
+    };
+
+    // xxx.js
+     axios({
+      method:'get',
+      url:'/api/haha',   // 实际请求的时 /haha
+    })
+    .then(function (response) { console.log(response) });
+```
+
+
 
 ------
 # 知识点
@@ -260,3 +306,7 @@ systemctl restart iptables.service
 命令：iptables -L -n --line-numbers
 比如要删除INPUT里序号为8的规则，执行：
 命令：iptables -D INPUT 8
+
+
+
+

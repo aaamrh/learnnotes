@@ -110,7 +110,6 @@ export const utils = (function(){
             position: absolute;
             animation: loading 1s linear infinite;
             top: 50%;
-            left: calc(50% - 100px);
             margin-top: calc(-64px / 2);
             margin-left: calc(-64px / 2);
             height: 64px;
