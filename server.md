@@ -137,11 +137,20 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
    2. `service mongod stop` #停止 
    3. `service mongod restart` #重启
 4. 启动服务 `mongod -f /etc/mongod.conf` 或 `mongod –fork –dbpath [dbpath] –logpath [logpath]`。 [mongod参数选项](https://blog.csdn.net/xqzhang8/article/details/72588278)
+
+usr/bin/mongod --fork --dbpath=/var/lib/mongodb --logpath=/var/log/mongodb/mongo.log --logappend // fork是后台运行
+
 5. 关闭后台运行
    1. `mongo`
    2. `use admin`
    3. `db.shutdownServer()`  或者 `db.adminCommand( { shutdown: 1 } )`
 6. 创建用户后登录方式： `mongo --port 27017`, `use database` , `db.auth('marh', '123123')`
+7. 卸载 `sudo yum erase $(rpm -qa | grep mongodb-org)`
+8. 数据库迁移
+   1. 导出数据 `mongoexport -d dbname -c collectionname -o filepath --type json/csv -f field `
+      * -d：数据库名 -c：集合名称 -o : 导出数据文件的路径 -type : 导出数据类型，默认json
+   2. 导入数据 `mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field`
+      * -d：数据库名 -c：集合名称 --file : 选择导入的文件 -type : 文件类型，默认json -f : 字段，type为csv是必须设置此项
 
 ```
 	use admin
@@ -231,9 +240,7 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
     })
     .then(function (response) { console.log(response) });
 ```
-
-
-
+    
 ------
 # 知识点
 ### **centOS7防火墙：iptables**
