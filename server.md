@@ -88,7 +88,6 @@ r=redhat  p=package   m=management, 用于安装 卸载 .rpm软件
     4. 修改后保存，更新配置文件`source /etc/profile`, 大功告成 ！！！
 
 
-
 -----------
 ### 安装git
 1. `yum -y install git`
@@ -149,7 +148,7 @@ usr/bin/mongod --fork --dbpath=/var/lib/mongodb --logpath=/var/log/mongodb/mongo
 8. 数据库迁移
    1. 导出数据 `mongoexport -d dbname -c collectionname -o filepath --type json/csv -f field `
       * -d：数据库名 -c：集合名称 -o : 导出数据文件的路径 -type : 导出数据类型，默认json
-   2. 导入数据 `mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field`
+   2. 导入数据 `mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field --authenticationDatabase admin`
       * -d：数据库名 -c：集合名称 --file : 选择导入的文件 -type : 文件类型，默认json -f : 字段，type为csv是必须设置此项
 
 ```
