@@ -1,25 +1,34 @@
-* [JS半知半解](#js半知半解)
-  * [map()](#map())
-  * [事件代理](#事件代理)
-  * [快速删除node_modules](#快速删除node_modules)
-  * [display和visibility,display与transition的冲突](#display和visibility,display与transition的冲突)
-  * [模块（你不知道的javascript上卷）CH5.5](#模块（你不知道的javascript上卷）CH5.5)
-  * [实时请求JSON数据](#实时请求JSON数据)
-  * [去除字符串空格](#去除字符串空格)
-  * [Ajax](#Ajax)
-  * [JS快速解析URL](#JS快速解析URL)
-  * [JS获取非行内样式](#JS获取非行内样式)
-  * [this 和 prototype 的区别](#JS中this和prototype的区别)
-  * [跳出嵌套for循环](#跳出嵌套for循环)
-  * [原生js提交form表单](#原生js提交form表单)
-  * [当图片丢失时传入默认图片](#当图片丢失时传入默认图片)
-  * [子级影响父级的BUG](#子级影响父级的BUG)
-  * [面向对象](#面向对象)
-  * [组件开发之自定义事件](#组件开发之自定义事件)
-* [你所不知道的Javascript (中)](#你所不知道的Javascript(中))
-  * [CH2.值](#CH2.值)
-    * [2.1.2数组](#2.1.2数组)
-    * [2.1.2数组方法](#2.1.2数组方法)
+- [JS半知半解](#js半知半解)
+    - [**offsetleft**](#offsetleft)
+    - [**map()**](#map)
+    - [**事件代理**](#事件代理)
+    - [**快速删除node_modules**](#快速删除node_modules)
+    - [**display和visibility,display与transition的冲突**](#display和visibilitydisplay与transition的冲突)
+    - [**模块（你不知道的javascript上卷）CH5.5**](#模块你不知道的javascript上卷ch55)
+    - [**实时请求JSON数据**](#实时请求json数据)
+    - [**正则**](#正则)
+    - [**Ajax**](#ajax)
+    - [**JS快速解析URL**](#js快速解析url)
+    - [**JS获取非行内样式**](#js获取非行内样式)
+    - [**JS中this和prototype的区别**](#js中this和prototype的区别)
+    - [**原生js提交form表单**](#原生js提交form表单)
+    - [**当图片丢失时传入默认图片**](#当图片丢失时传入默认图片)
+    - [**子级影响父级的BUG**](#子级影响父级的bug)
+    - [**面向对象**](#面向对象)
+    - [**好看的 conssole **](#好看的-conssole-)
+    - [**组件开发之自定义事件**](#组件开发之自定义事件)
+- [你所不知道的Javascript(中)](#你所不知道的javascript中)
+  - [**CH2.值**](#ch2值)
+    - [**2.1.2数组**](#212数组)
+    - [**2.1.2数组方法**](#212数组方法)
+- [我所不知道的Javascript](#我所不知道的javascript)
+    - [**2.1.2让页面处于编辑状态**](#212让页面处于编辑状态)
+    - [**2.1.2避免Switch**](#212避免switch)
+- [学习ES6遇到的错误](#学习es6遇到的错误)
+    - [1.](#1)
+    - [2．](#2)
+- [H5](#h5)
+    - [**历史管理**](#历史管理)
 
 * [我所不知道的Javascript](#我所不知道的Javascript)
   * [2.1.2	让页面处于编辑状态](#2.1.2让页面处于编辑状态)
@@ -391,6 +400,20 @@ xmlhttp.open("GET","");
 // 实时的读取JSON文件时，因为在浏览器中会有缓存，所以设置请求头
 xmlhttp.setRequestHeader("Cache-Control","no-cache");
 xmlhttp.send();
+
+
+IE浏览器下使用 定时器循环发送GET请求时，如果两次请求的地址和参数相同，在不刷新页面的情况下，浏览器会缓存第一次请求的内容，服务端更新后浏览器仍然显示第一次的内容。
+
+解决办法： 
+一. GET请求URL后加随机数，让服务器认为不是相同的请求。也可以传一个随机的参数。 
+例: "http://www.example.com/index?" + new Date().getTime() 
+
+二. 在ajax发送请求前加上 xmlHttpRequest.setRequestHeader("If-Modified-Since","0") 
+
+三. 在ajax发送请求前加上 xmlHttpRequest.setRequestHeader("Cache-Control","no-cache"); 
+
+四. 使用POST代替GET，浏览器不会对POST做缓存。
+
 
 
 // 跨域请求 jsonP
