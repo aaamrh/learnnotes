@@ -448,7 +448,7 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
 
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secret string'
-    socketio.init_app(app)
+    socketio.init_app(app, cors_allowed_origins="*") # 解决跨域问题
 
     @app.route('/')
     def index():
@@ -459,6 +459,12 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
     def new_message(message_body):
         print(message_body)
         emit('aaa', '我是服务器aaa的数据')
+
+
+    # 在 flask 路由中用 socketio.emit 发送数据
+    @app.route('/hello')
+    def hello():
+        socketio.emit('hello', 'data')
 
 ```
 
