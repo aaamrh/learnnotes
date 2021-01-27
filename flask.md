@@ -484,3 +484,50 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
     </script>
 ```
 ------
+
+### flask-migrate 迁移数据库修改字段没变化
+``` python
+# 在生成的migrations文件夹中，找到env.py文件， 添加下面注释的两行
+
+with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            process_revision_directives=process_revision_directives,
+            compare_type=True,  # 检查字段类型
+            compare_server_default=True,  # 比较默认值
+            **current_app.extensions['migrate'].configure_args
+        )
+
+```
+
+
+### flask-sqlalchemy orm 一对多的使用
+``` python
+
+# 建表
+class Users(db.Model):
+    __tablename__ = 'user'
+
+    id = db.Column(db.Integer, primary_key = True)
+
+    strategies = db.relationship('Strategy', back_populates="user")
+
+
+class Strategy(db.Model):
+    __tablename__ = 'strategy'
+
+    id = db.Column(db.Integer, primary_key = True)
+    user_strategy = db.Column( db.Text, default="{}", onupdate=datetime.datetime.now, comment=u"用户配置策略" )
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('Users', back_populates='strategies') # 对应Users的字段名 strategies
+
+# 使用
+    res = Users.query.filter(Users.id == 1).first()
+    print(res.strategies[0].user_strategy)
+
+    cls = Strategy.query.filter(Strategy.id == 6).first()
+    print(res.user.id)
+
+```

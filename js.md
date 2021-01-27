@@ -5,9 +5,11 @@
     - [**快速删除node_modules**](#快速删除node_modules)
     - [**display和visibility,display与transition的冲突**](#display和visibilitydisplay与transition的冲突)
     - [**模块（你不知道的javascript上卷）CH5.5**](#模块你不知道的javascript上卷ch55)
+    - [**获取设备信息**](#获取设备信息)
     - [**实时请求JSON数据**](#实时请求json数据)
     - [**正则**](#正则)
     - [**Ajax**](#ajax)
+    - [**图片处理**](#图片处理)
     - [**JS快速解析URL**](#js快速解析url)
     - [**JS获取非行内样式**](#js获取非行内样式)
     - [**JS中this和prototype的区别**](#js中this和prototype的区别)
@@ -321,6 +323,26 @@ obj.releaseCapture() // 释放全局捕获
 
 ```
 
+
+### **获取设备信息**
+
+``` javascript
+  console.log(navigator.userAgent)
+
+   function handleDeviceType(){
+        if( /mobile/i.test(navigator.userAgent) ){
+            document.getElementById('pc').style.display = 'none';
+            document.body.removeChild(document.getElementById('pc'));
+            document.getElementById('phone').style.display = 'block';
+        }else{
+            document.getElementById('pc').style.display = 'block';
+            document.getElementById('phone').style.display = 'none';
+            document.body.removeChild(document.getElementById('phone'))
+        }
+    }
+
+```
+
 ### **实时请求JSON数据**
 会涉及到浏览器缓存的问题导致JSON中数据修改后，页面内容没有改变。
 因此在ajax发送请求前加上	`xmlHttpRequest.setRequestHeader("Cache-Control","no-cache");`
@@ -415,7 +437,6 @@ IE浏览器下使用 定时器循环发送GET请求时，如果两次请求的�
 四. 使用POST代替GET，浏览器不会对POST做缓存。
 
 
-
 // 跨域请求 jsonP
   <scripts>
     function callback(data){ alert(data) }
@@ -441,8 +462,26 @@ data = request.get_json()  // ->  <class 'dict'>
 
 ```
 
+### **图片处理**
+
+``` javascript
+
+img.src = 'data:image/jpg;base64,' + arrayBufferToBase64(data);
+
+function arrayBufferToBase64( buffer ) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
+}
+```
+
 
 ### **JS快速解析URL**
+
 ``` javascript
 function parseURL(url) {
   var a = document.createElement('a');
