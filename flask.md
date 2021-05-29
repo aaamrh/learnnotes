@@ -54,6 +54,17 @@ def req():
     print(request.args["name"]) # 索引获取name wl
     print(request.args.to_dict()) # 获取到一个字典 {'id': '1', 'name': 'wl'}
 
+    # request 获取url
+    # 通过发送 GET 到 http://127.0.0.1:5000/test/a?x=1，
+    print(request.path)  # /test/a
+    print(request.host)  #: 127.0.0.1:5000
+    print(request.host_url)  #: http://127.0.0.1:5000/
+    print(request.full_path)   #: /test/a?x=1
+    print(request.script_root)   #: 
+    print(request.url)   #: http://127.0.0.1:5000/test/a?x=1
+    print(request.base_url)   #: http://127.0.0.1:5000/test/a
+    print(request.url_root)   #: http://127.0.0.1:5000/
+
     return "Hello"
 
 # 接收 form 表单参数
@@ -95,9 +106,25 @@ def login():
 
 ```
 
-### 下载文件
-``` python
+### 获取 url
 
+``` python
+# request 获取url
+测试了一下：通过发送 GET 到 http://127.0.0.1:5000/test/a?x=1，
+
+# request.path: /test/a
+# request.host: 127.0.0.1:5000
+# request.host_url: http://127.0.0.1:5000/
+# request.full_path: /test/a?x=1
+# request.script_root: 
+# request.url: http://127.0.0.1:5000/test/a?x=1
+# request.base_url: http://127.0.0.1:5000/test/a
+# request.url_root: http://127.0.0.1:5000/
+```
+
+### 下载文件
+
+``` python
     # 普通下载文件方式
     @app.route('/export_csv/')
         def export_csv():
@@ -131,7 +158,7 @@ def login():
 **解决：** '推荐理财.docx'.encode("utf-8").decode("latin1")
 
 
-#### get
+### 获取前台GET的数据
     url: http://localhost:5000/hello?name=Grey
 
     // 第二个参数是默认值
@@ -190,6 +217,7 @@ def login():
 ```
 
 ### 自定义上下文：context_processor上下文处理器
+
 > 如果多个模板都需要使用同一变量， 那么比起在多个视图函数中重复传入， 更好的方法是能够设置一个模板全局变量。 Flask提供了一个`app.context_processor`装饰器，
 
 ```python
@@ -208,7 +236,6 @@ def login():
     {{bar}}
 ```
 
-
 ### 自定义全局函数
 ```python
     @app.template_global()
@@ -218,7 +245,6 @@ def login():
     # 1.html
     # <p>全局函数global: {{ Global(1,4,5) }} </p>
 ```
-
 
 ### 自定义过滤器
 ```python
@@ -257,14 +283,11 @@ def login():
 
     # flash()函数发送的消息会存储在session中
     # get_flashed_message()函数被调用时，session中存储的所有消息都会被移除
-
 ```
-
 
 ### 404 页面
 ``` python
     # 错误函数处理需要附加 app.errorhandler()装饰器
-
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template('errors/404.html'), 404
@@ -273,39 +296,10 @@ def login():
 ### 链接数据库
 ``` python
     # 安装 pip install pymysql flask-sqlalchemy
-
     import pymysql
     from flask_sqlalchemy import SQLAlchemy
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://username:pwd@host/dbname')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-
-
-
-```
-
-### 链接数据库出现的错误
-
-``` sql
-    -- mysql8.0 版本之后1130解决方案
-    CREATE USER 'marh'@'%' IDENTIFIED BY 'password';
-
-    GRANT ALL PRIVILEGES ON *.* TO 'marh'@'%' WITH GRANT OPTION;
-
-    -- mysql8.0之前
-    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;
-
-    flush privileges;
-
-    -- mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password
-    use mysql;
-    
-    ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; -- 更改加密方式
-
-    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; -- 更新用户密码
-
-    FLUSH PRIVILEGES; -- 刷新权限
 ```
 
 ### flask-sqlalchemy
@@ -501,20 +495,22 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
 ### flask-migrate 迁移数据库修改字段没变化
 
 ``` python
-# 在生成的migrations文件夹中，找到env.py文件， 添加下面注释的两行
+#最近在开发过程中遇到了需要将string类型转换成bool类型的问题，但是一开始设计表是设计成了string类型，因此记录下flask-migrate更改表字段类型的方式。
+
+#alembic支持检测字段长度改变，不过它不是默认的，需要配置；
+#找到migrations/env.py文件，在run_migrations_online函数加入如下内容：
 
 with connectable.connect() as connection:
-        context.configure(
-            connection=connection,
-            target_metadata=target_metadata,
-            process_revision_directives=process_revision_directives,
-            compare_type=True,  # 检查字段类型
-            compare_server_default=True,  # 比较默认值
-            **current_app.extensions['migrate'].configure_args
-        )
+    context.configure(
+        connection=connection,
+        target_metadata=target_metadata,
+        process_revision_directives=process_revision_directives,
+        compare_type=True,  # 检查字段类型
+        compare_server_default=True,  # 比较默认值
+        **current_app.extensions['migrate'].configure_args
+    )
 
 ```
-
 
 ### flask-sqlalchemy orm 一对多的使用
 ``` python
@@ -546,21 +542,6 @@ class Strategy(db.Model):
 
 ```
 
-### flask-sqlalchemy 修改表modal后数据库表不更新
-
-``` python
-#最近在开发过程中遇到了需要将string类型转换成bool类型的问题，但是一开始设计表是设计成了string类型，因此记录下flask-migrate更改表字段类型的方式。
-
-#alembic支持检测字段长度改变，不过它不是默认的，需要配置；
-#找到migrations/env.py文件，在run_migrations_online函数加入如下内容：
-
-context.configure(
-  …………
-  compare_type=True,  # 检查字段类型
-  compare_server_default=True # 比较默认值
-)
-```
-
 ### restful api
 
 ``` python
@@ -589,20 +570,4 @@ class Foo(Resource):
   def get(self):
     pass
 
-```
-
-### 获取 url
-
-``` python
-# request 获取url
-测试了一下：通过发送 GET 到 http://127.0.0.1:5000/test/a?x=1，
-
-# request.path: /test/a
-# request.host: 127.0.0.1:5000
-# request.host_url: http://127.0.0.1:5000/
-# request.full_path: /test/a?x=1
-# request.script_root: 
-# request.url: http://127.0.0.1:5000/test/a?x=1
-# request.base_url: http://127.0.0.1:5000/test/a
-# request.url_root: http://127.0.0.1:5000/
 ```

@@ -29,3 +29,25 @@ turtle.pendown()
 turtle.color('red')
 turtle.circle(45)
 ```
+
+### 优化技巧
+``` python
+if n == 0: 
+  print(0)
+elif n == 1:
+  print(1)
+elif n == 2:
+  print(2)
+else:
+  print(-1)
+
+# 优化后
+def foo(x):
+  return {
+    0: 0,
+    1: 1,
+    2: 2
+  }.get(x, -1)
+
+
+```
