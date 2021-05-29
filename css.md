@@ -1,10 +1,10 @@
 # Responsive Web Design
 
-**语法:**
+## **语法:**
 
     `@media mediatype and|not|only (media feature) { css... }`
 
-**媒体属性(media feature):**
+## c**媒体属性(media feature):**
 
     width:          视口宽度
     height:         视口高度
@@ -17,18 +17,21 @@
     resolution:     检测屏幕或者打印机的分辨率，如: min-resolution:300dpi
     ... ...
 
-**IE条件注释**
+## **IE条件注释**
+
 ``` html
-<!--[if IE 5]>仅IE5.5可见<![endif]-->
-<!--[if gt IE 5.5]>仅IE 5.5以上可见<![endif]-->
-<!--[if lt IE 5.5]>仅IE 5.5以下可见<![endif]-->
-<!--[if gte IE 5.5]>IE 5.5及以上可见<![endif]-->
-<!--[if lte IE 5.5]>IE 5.5及以下可见<![endif]-->
-<!--[if !IE 5.5]>非IE 5.5的IE可见<![endif]-->
+
+    <!--[if IE 5]>仅IE5.5可见<![endif]-->
+    <!--[if gt IE 5.5]>仅IE 5.5以上可见<![endif]-->
+    <!--[if lt IE 5.5]>仅IE 5.5以下可见<![endif]-->
+    <!--[if gte IE 5.5]>IE 5.5及以上可见<![endif]-->
+    <!--[if lte IE 5.5]>IE 5.5及以下可见<![endif]-->
+    <!--[if !IE 5.5]>非IE 5.5的IE可见<![endif]-->
+
 ```
 
+## **可编辑的css**
 
-**可编辑的css**
 ``` html
 <style>
 body style{
@@ -48,4 +51,23 @@ body style{
     </style>
 </body>   
 
+```
+
+## **safari中flex布局时img宽高等比缩放自适应问题**
+
+``` html
+    <div class="flexBox">
+        <img src="image.jpg" alt="img"/>
+    </div>
+```
+
+```css
+    .flexBox{
+        display:flex;
+        align-items:center; // 添加这行代码
+    }
+    
+    .flexBox img{
+        width:30%;
+    }
 ```

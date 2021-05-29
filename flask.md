@@ -64,11 +64,21 @@ def login():
     print(request.form['data'])
     print(request.form.getlist('checkbox')) # 获取checkbox的数据要用getlist
 
+    request.form.get("key", type=str, default=None) # 获取表单数据
 
-# 接收文件
+    request.args.get("key") # 获取get请求参数
+    request.values.get("key") # 获取所有参数
+
+
+# 上传文件
 @app.route("/login", methods=["POST", "GET"])
 def login():
     my_file = request.files.get("my_file")  # 格式 ImmutableMultiDict([('my_file', <FileStorage: 'Chrysanthemum.jpg' ('image/jpeg')>)])
+    # f = request.files['file']
+
+    # if not os.path.exists(dir_name):
+    #   os.makedirs(dir_name, 755)
+    
     file_path = os.path.join("static", "1.jpg")
     my_file.save(file_path)
 
@@ -80,6 +90,8 @@ def login():
     print(request.json) # 请求头中存在 Content-Type:application/json 将请求体中的数据 存放在JSON中
     print(request.values) # CombinedMultiDict([ImmutableMultiDict([]), ImmutableMultiDict([('username', '123'), ('pwd', '123'), ('my_file', '')])])
     print(request.values.to_dict()) # 这是个坑!!!{'username': '123', 'pwd': '123', 'my_file': ''}
+    print(request.get_data())
+    print(request.get_json())
 
 ```
 
@@ -102,9 +114,7 @@ def login():
 
     def export_csv():
         def send_file():
-            store_path = os.path.join( os.path.dirname(__file__), '推荐理财.docx' )
-            print(store_path)
-            with open(store_path, 'rb') as f:
+            with open(url, 'rb') as f:
             while 1:
                 data = f.read(20 * 1024 * 1024)   # 每次读取20M
                 if not data:
@@ -275,8 +285,8 @@ def login():
 
 ```
 
-
 ### 链接数据库出现的错误
+
 ``` sql
     -- mysql8.0 版本之后1130解决方案
     CREATE USER 'marh'@'%' IDENTIFIED BY 'password';
@@ -299,6 +309,7 @@ def login():
 ```
 
 ### flask-sqlalchemy
+
 ``` python
     # 创建模型
     class Users(db.Model):
@@ -308,35 +319,37 @@ def login():
 ```
 
 ### Session
-```python
-	from flask import session
-	
-	# 设置session
-	session['username'] = 'aaamrh'
 
-	# 读取session
-	result = session[‘key’]     # 如果内容不存在，将会报异常
-	result = session.get(‘key’) # 如果内容不存在，将返回None
-	
-	# 删除session
-	session.pop('username')
-	
-	# 清除session中的所有数据
-	session.clear()
-	
-	# 设置session的过期时间
-	# 如果没有指定session的过期时间，那么默认是浏览器关闭后就自动结束
-	# 如果设置了session的permanent属性为True，那么过期时间是31天。
-	session.permanent = True
-	
-	# 设置有效期限
-	from datetime import timedelta
-	app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7) # 配置7天有效 
-	app.permanent_session_lifetime = timedelta(minutes=10)       # 10分钟有效期
+``` python
+    from flask import session
+        
+    # 设置session
+    session['username'] = 'aaamrh'
+
+    # 读取session
+    result = session[‘key’]     # 如果内容不存在，将会报异常
+    result = session.get(‘key’) # 如果内容不存在，将返回None
+        
+    # 删除session
+    session.pop('username')
+        
+    # 清除session中的所有数据
+    session.clear()
+        
+    # 设置session的过期时间
+    # 如果没有指定session的过期时间，那么默认是浏览器关闭后就自动结束
+    # 如果设置了session的permanent属性为True，那么过期时间是31天。
+    session.permanent = True
+        
+    # 设置有效期限
+    from datetime import timedelta
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7) # 配置7天有效 
+    app.permanent_session_lifetime = timedelta(minutes=10)       # 10分钟有效期
 
 ```
 
 ### python shell CURD
+
 ```python
 
     from app import db, Note
@@ -486,6 +499,7 @@ result = db.execute(text('select * from table where id < :id and typeName=:type'
 ------
 
 ### flask-migrate 迁移数据库修改字段没变化
+
 ``` python
 # 在生成的migrations文件夹中，找到env.py文件， 添加下面注释的两行
 
