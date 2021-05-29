@@ -312,7 +312,3 @@ systemctl restart iptables.service
 命令：iptables -L -n --line-numbers
 比如要删除INPUT里序号为8的规则，执行：
 命令：iptables -D INPUT 8
-
-
-
-

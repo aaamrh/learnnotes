@@ -18,3 +18,13 @@
 > 9. `git pull upstream master` 可以代替步骤 7+8。 `git pull = fetch + merge` 
 > 
 >此时自己本地的代码就是最新的了，修改完代码后，`重复步骤 3-5`
+
+
+## 命令
+`git add -A`  提交所有变化
+
+`git add -u` 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+
+`git add .`  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
+
+`git add .` 后撤销： `git reset .`

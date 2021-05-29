@@ -545,3 +545,64 @@ class Strategy(db.Model):
     print(res.user.id)
 
 ```
+
+### flask-sqlalchemy 修改表modal后数据库表不更新
+
+``` python
+#最近在开发过程中遇到了需要将string类型转换成bool类型的问题，但是一开始设计表是设计成了string类型，因此记录下flask-migrate更改表字段类型的方式。
+
+#alembic支持检测字段长度改变，不过它不是默认的，需要配置；
+#找到migrations/env.py文件，在run_migrations_online函数加入如下内容：
+
+context.configure(
+  …………
+  compare_type=True,  # 检查字段类型
+  compare_server_default=True # 比较默认值
+)
+```
+
+### restful api
+
+``` python
+
+# restful api
+@api.representation('text/html') 
+  def output_html(data, code, headers):
+    resp = Response(data)
+    return resp
+
+
+def login_required(func):
+  @functools.wraps(func) # 修饰内层函数，防止当前装饰器去修改被装饰函数的属性
+  def inner(*args, **kwargs): 
+    uid = session.get('uid')
+    if not session.get('logged_in'):
+      return {'msg': u'请登录后再次尝试'}, 403
+    else:
+      return func(*args, **kwargs)
+  return inner
+  
+
+class Foo(Resource):
+  method_decorators = {'get': [login_required]} # flask_restful 中装饰器的使用
+
+  def get(self):
+    pass
+
+```
+
+### 获取 url
+
+``` python
+# request 获取url
+测试了一下：通过发送 GET 到 http://127.0.0.1:5000/test/a?x=1，
+
+# request.path: /test/a
+# request.host: 127.0.0.1:5000
+# request.host_url: http://127.0.0.1:5000/
+# request.full_path: /test/a?x=1
+# request.script_root: 
+# request.url: http://127.0.0.1:5000/test/a?x=1
+# request.base_url: http://127.0.0.1:5000/test/a
+# request.url_root: http://127.0.0.1:5000/
+```
