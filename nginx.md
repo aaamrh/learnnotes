@@ -48,3 +48,21 @@ location /proxy/ {
 -- 会被代理到http://127.0.0.1:81/ftlynxtest.html 这个url
 
 ```
+
+## 阿里云博客配置
+``` sql
+server{
+    listen 80;
+    server_name www.maruihua.cn;
+    location / {
+        root /home/marh/projects/best/client-/build;
+        try_files $uri /index.html;
+        index index.html;
+    }
+    location /api {
+      rewrite  ^/api/(.*)$ /$1 break;
+      proxy_pass http://127.0.0.1:3500;
+    }
+}
+
+```
