@@ -54,7 +54,6 @@ body style{
 ```
 
 ## **safari中flex布局时img宽高等比缩放自适应问题**
-
 ``` html
     <div class="flexBox">
         <img src="image.jpg" alt="img"/>
@@ -70,4 +69,34 @@ body style{
     .flexBox img{
         width:30%;
     }
+```
+
+## 伪类让图片垂直居中
+
+``` html
+    <style type="text/css">
+        .picture{
+            width: 170px;height: 230px;
+            border: 1px solid #ddd;
+            padding: 5px;margin: 20px auto;
+            text-align: center; 
+            background: red;
+        }
+        .picture:before{
+            content:"";
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+        }
+        .picture img{
+            vertical-align: middle;
+            min-width: 120px; min-height: 200px; border:1px solid green;
+        }
+    </style>
+    <body>
+        <div class="picture">
+            <img src="1.jpg" alt="">
+        </div>
+    </body>
 ```

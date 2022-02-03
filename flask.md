@@ -377,6 +377,10 @@ def login():
 
     Note.query.filter(or_(Note.body=='foo', Note.body=='bar'))    # OR
 
+    # 当想查询某字段!=''的数据时, 用filter()
+    # Task.query.filter_by(user_id=1, result='').all()
+    Task.query.filter(Task.user_id==1, Task.result!='').all()
+
     # Update
     note = Note.query.get(2)
     note.body = 'update'
