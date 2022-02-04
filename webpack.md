@@ -206,6 +206,36 @@ rules:[{
 	}]
 ```
 
+### CSS 兼容
+
+		添加css前缀
+
+`npm install postcss postcss-loader postcss-preset-env -D`
+
+``` js
+	rules: [
+		{
+			test: /\.css$/,
+			use: ['style-loader','css-loader', 'postcss-loader']
+		}
+	]
+```
+
+```js
+// postcss.config.js
+module.exports = {
+  plugins: [require('postcss-preset-env')]
+}
+```
+
+```
+<!-- .browserslistrc  -->
+
+# 换行相当于 and
+last 2 versions # 回退两个浏览器版本
+> 0.5% # 全球超过0.5%人使用的浏览器，可以通过 caniuse.com 查看不同浏览器不同版本占有率
+IE 10 # 兼容IE 10
+```
 
 ### vue-loader
 
