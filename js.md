@@ -27,24 +27,14 @@
     - [**2.1.2让页面处于编辑状态**](#212让页面处于编辑状态)
     - [**2.1.2避免Switch**](#212避免switch)
 - [学习ES6遇到的错误](#学习es6遇到的错误)
-    - [1.](#1)
-    - [2．](#2)
 - [H5](#h5)
     - [**历史管理**](#历史管理)
-
-* [我所不知道的Javascript](#我所不知道的Javascript)
-  * [2.1.2	让页面处于编辑状态](#2.1.2让页面处于编辑状态)
-  * [2.1.2	避免Switch](#2.1.2避免Switch)
-
-* [学习ES6遇到的错误](#学习ES6遇到的错误)
-
-
-* [H5](#H5)
-  * [历史管理](#历史管理)
-
+- [GET](#GET)
 
 # JS半知半解
+
 ### **offsetleft**
+
 此属性可以返回当前元素距离某个父辈元素左边缘的距离，当然这个父辈元素也是有讲究的。
 1. 如果父辈元素中有定位的元素，那么就返回距离当前元素最近的定位元素边缘的距离。
 2. 如果父辈元素中没有定位元素，那么就返回相对于body左边缘距离。
@@ -147,7 +137,7 @@ console.log(timetamp4);
 		["1", "2", "3"].map(parseInt);
 		// 你可能觉的会是[1, 2, 3]
 		// 但实际的结果是 [1, NaN, NaN]
-
+	
 		// 通常使用parseInt时,只需要传递一个参数.但实际上,parseInt可以有两个参数.第二个参数是进制数.可以通过语句"alert(parseInt.length)===2"来验证.
 		// map方法在调用callback函数时,会给它传递三个参数:当前正在遍历的元素, 元素索引, 原数组本身.
 		// 第三个参数parseInt会忽视, 但第二个参数不会,也就是说,parseInt把传过来的索引值当成进制数来使用.从而返回了NaN.
@@ -511,7 +501,7 @@ function parseURL(url) {
   };
 }
  console.log(parseURL('https://test.com:8080/path/index.html?name=angle&age=18#top'));
- ```
+```
 
 ### **JS获取非行内样式**
 
@@ -785,7 +775,7 @@ document.designMode='on';  //Firefox(Gecko)
 
 ### **2.1.2避免Switch**
 ![switch优化](https://github.com/aaamrh/learnnotes/blob/master/images/js/scroll.png)
- 
+
 
 # 学习ES6遇到的错误
 ### 1.
@@ -823,7 +813,7 @@ function f() { console.log('I am outside!'); }
   if (false) {}
   f();
 }());
-``` 
+```
 
 # H5
 ### **历史管理**
@@ -831,3 +821,582 @@ function f() { console.log('I am outside!'); }
 // onhashchange 改变hash值来管理
 window.onhashchange = f(){}   // hash改变后出发  eg: 随机彩票
 ```
+
+# GET
+
+### React 滚动条跳到目标元素位置
+
+``` js 
+		const contractUploadWrapper = ReactDOM.findDOMNode(this.contractUploadWrapper);
+		container.scrollTop = (contractUploadWrapper.offsetTop + title.offsetHeight) - 15;
+```
+
+### TS 
+
+``` js
+  interface C {
+			name:string,
+			leg:number
+	}
+	interface C2 {
+			name2:string,
+			leg:number
+	}
+
+	// 判断是什么类型
+	function isC (arg: C|C2): arg is C{
+			return (arg as C) .name !== undefined
+	}
+	function test2(a: C|C2){
+			if (isC(a)){
+					// 确定为C
+			}
+	}
+
+``` less
+
+less px转rem
+@function px2rem($px){
+	@return $px*320/$designWidth/20 + rem;
+}
+
+```
+
+**ReactNode ? ReactElement**
+
+``` ts
+	// ReactElement
+	interface ReactElement<
+		P = any,
+		T extends string | JSXElementConstructor<any> =
+			| string
+			| JSXElementConstructor<any>
+	> {
+		type: T
+		props: P
+		key: Key | null
+	}
+
+	// ReactNode
+	type ReactText = string | number;
+	type ReactChild = ReactElement | ReactText;
+
+	interface ReactNodeArray extends Array<ReactNode> {}
+	type ReactFragment = {} | ReactNodeArray;
+	type ReactNode = ReactChild | ReactFragment | ReactPortal | boolean | null | undefined;
+```
+
+ReactElement是一个接口，包含type,props,key三个属性值。该类型的变量值只能是两种： null 和 ReactElement实例；
+
+ReactNode是一种联合类型(Union Types)，可以是string、number、ReactElement、{}、boolean、ReactNodeArray。由此可以看出ReactElement类型的变量可以直接赋值给ReactNode类型的变量，但是反过来是不行的。
+
+### 剩余参数
+
+interface IObj = {
+	[ key: string ] : any;
+}
+
+function merge(target: IObj, ...orthers: Array<IObj>){}
+
+
+
+### 函数中的this
+
+		函数中使用this， 请放在函数的第一个参数中声明this的类型， 放在其他参数之前
+
+``` ts
+// 普通函数中的this默认会被标注为any
+interface T {
+	a: number,
+	fn: (x: number) => void
+}
+
+let obj: T {
+	a: 1,
+	fn(x: number){
+		(this as T).a  = 10;
+	}
+}
+// 箭头函数中的this是固定的， 取决于箭头函数所在的环境
+interface T {
+	a: number,
+	fn: (x: number) => void
+}
+
+let obj: T {
+	a: 1,
+	fn(this: T, x: number){
+		return （） => {
+			
+		}
+	}
+}
+```
+
+### class
+
+``` ts
+	class User {
+		// ts中属性必须再构造函数外单独定义
+		name: string
+	
+		constructor (
+			uid: string
+		) {
+			this.id = uid;
+			// this.name = 'Ryan';  js中是这样定义
+		}
+	
+	}
+	
+	// 构造函数参数属性
+	class User {
+	
+		/*
+			当我们给构造函数设置了访问修饰符: public, ts会做如下的事情
+			- 给当前类添加同名的成员属性
+			- 在类实例化时，回把传入的参数复制给对应的成员属性 
+		*/
+		constructor (
+			public id: number,
+		) { }
+		postArticle(title: string){
+			console.log('发布了一篇文章')
+		}
+	}
+
+	// 继承
+	class VIP extends User {
+		constructor(
+			id: number,
+			public status: string
+		){
+			// 必须调用super知后才能访问this
+			super( 1, "teacher")
+		}
+		
+		// 重载
+		postArticle(title: string):void;
+		postArticle(title: string, file: string): void;
+		postArticle(title: string, file ?: string){
+			super.postArticle("初学ts")；
+			
+			if (file){ console.log("上传文件") }
+		}
+	}
+```
+
+
+### 修饰符
+
+```ts
+	// public private protected readonly
+	// public 访问级别: 自身 子类 类外
+	// private 自身
+	// protected 自身 子类
+	// readonly 自身 子类 类外
+
+```
+
+### 寄存器
+
+```ts
+	class User {
+		constructor( private _phoneNumber : string){ }
+		
+		get phoneNumber () {
+			rerturn `176****4096`
+		}
+		
+		set phoneNumber () {
+			if ( this._phoneNumber.length > 11 ) { return "长度过长" }
+		}
+	}
+```
+
+### 静态成员
+
+``` ts
+	type IAllowFileTypeList = 'png' | 'jpg' | 'svg';
+	
+	class User {
+		static readonly ALLOW_FILE_LIST: Array<IAllowFileTypeList> = ['png', 'jpg', 'svg'];
+	
+		constructor (
+			private _allowFileTypes: Array<IAllowFileTypeList>
+		) { } 
+	} 
+
+
+```
+
+### 抽象类
+
+		abstract修饰的方法不能有方法体
+		一个类有抽象方法， 该类也必须时抽象类
+		抽象类不能用new实例化,  因为抽象类说明该类有未实现的方法
+		子类继承抽象类，子类必须实现抽象类中所有的抽象方法
+
+```ts
+	abstract class Component <T1, T2> {
+		props: T1;
+		state: T2;
+		
+		constructor(props: T1){ 
+			this.props = props;
+		}
+		abstract render() : string
+	}
+	
+	interface IProps {
+		name: string
+	}
+	interface IStateProps{
+		age: number
+	}
+	
+	interface ILog {
+		getInfo (): string
+	}
+	
+	interface IAlert {
+		alert () : void
+	}
+	
+	class MyComponent extends Component<IProps, IStateProps> implements  ILog, IAlert {
+		constructor( props: IProps ) {
+			this.state = {
+				age: 10
+			}
+		}
+		
+		render () { console.log( this.state.age ); }
+	}
+	
+	var foo = new MyComponent({name: "Ryan"})
+```
+
+### implements VS extends
+
+假设我有一个干净的抽象类A：
+
+abstract class A {
+    abstract m(): void;
+}
+在继承(extends)方面，就像C#或者java里面那样，我可以像下面这样来继承这个抽象类：
+
+//TypeScript
+class B extends A{
+}
+但是在实现方面（implement），在TypeScript中也可以去implement一个类：
+
+class C implements A {
+    m(): void { }
+}
+那么问题来了：类B和类C在行为上有什么不同？我该如何选择？
+
+问题解答
+implements关键字将类A当作一个接口，这意味着类C必须去实现定义在A中的所有方法，无论这些方法是否在类A中有没有默认的实现。同时，也不用在类C中定义super方法。
+
+而就像是extends关键字本身所表达的意思一样，你只需要实现类A中定义的虚方法，并且关于super的调用也会有效。
+
+我想在抽象方法的情况下，这并没有什么区别。但是很少有只使用抽象方法的类，如果只使用抽象方法，最好将其转换为接口。
+
+
+### 类型保护
+
+		typeof instanceof  类型谓词
+
+``` ts
+	function canEach ( data: any ) data is Element[] | Nodelist {
+		return data.forEach !== undefined;
+	}
+```
+
+
+### 类型操作
+
+```ts
+	let str = "Ryan";
+	let t = typeof str; // let 是将’string‘作为值
+	type t = typeof str; // typeof 是奖string作为类型
+	
+	
+	// keyof 只能针对类型操作
+	
+	let p1 = {
+		name: 'Ryan',
+		age: 10
+	}
+	
+	// keyof p1 > error
+	// keyof typeof p1   > right
+```
+
+### 类型兼容
+
+```ts
+	interface IFly {
+		fly() : void;
+	}
+		
+	class Person implements IFly {
+		name: string;
+		age:  number;
+		study(){}
+		fly(){}
+	}
+	
+	class Cat implements IFly {
+		name: string;
+		age: number;
+	}
+	
+	let p1 = new Person();
+	let c1 = new Cat();
+	
+	function fn(arg: IFly){ // 可以传入cat类型 也可以传入Person类型
+		arg.fly();
+	}
+	
+	fn(p1)
+	fn(c1)
+	
+```
+
+
+
+### Vue Element
+
+```js
+	formRef.value.validate((valid) => {
+		console.log(valid)
+		// formRef.value.resetFields()
+		// formRef.value.validateField('userEmail', (valid) => {
+        // 	 if (valid) 	 return false
+		// })
+	})// 校验全部表单
+
+	formRef.value.clearValidate('video') // 清除校验
+
+    resetFormRef.validateField('userEmail',async (valid) => {
+        if (valid) 	 return false
+    }) // 只校验一个表单
+
+	roomform.resetFields() // 重置表单 清除校验 
+```
+
+
+
+
+
+### 大文件切片上传（丐版）
+
+```ejs
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>EJS Welcome to <%= title %>
+  </p>
+  <form enctype="multipart/form-data">
+    <input type="file">
+  </form>
+  <button type="button" onclick="submit()">上传</button>
+
+  <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js"
+    type="application/javascript"></script>
+  <script>
+
+    function submit() {
+      ApiUploadBigFile(document.getElementsByTagName('input')[0].files[0])
+    }
+
+    async function ApiUploadBigFile(file) {
+      let bytesPerPiece = 5 * 1024 * 1024;//切片大小
+      let start = 0;
+      let end;
+      let index = 0;
+      let file_size = file.size;
+      let file_name = file.name;
+      let totalPieces = Math.ceil(file_size / bytesPerPiece);
+      let timestamp = new Date().getTime();
+
+      console.log(file_size, bytesPerPiece)
+
+      while (start < file_size) {
+        end = start + bytesPerPiece;
+        if (end > file_size) {
+          end = file_size;
+        }
+        let chunk = file.slice(start, end);//执行切片操作
+        let sliceName = file_name + "." + index;
+        let formData = new FormData();
+        formData.append('timestamp', timestamp);
+        formData.append('chunkname', sliceName);
+        formData.append('name', file_name);
+        formData.append('size', file_size);
+        formData.append('total', totalPieces);
+        formData.append('index', index);
+        formData.append('file', chunk);//将表单id、文件、文件名输入form表单中，如果第三个参数不设置，则默认使用blob作为文件名
+
+        console.log(file, chunk)
+
+        let res1 = await axios.post(`/upload-big-file`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        if (res1.data.code == 1) {
+          console.log(`已传输${index + 1}个切片，共${totalPieces}个切片`)
+          this.uploadPercentage = Math.ceil((index + 1) / totalPieces * 100);
+          start = end;
+          index++;
+        } else {
+          Promise.reject("文件传输过程中服务器发生错误");
+          return;
+        }
+      }
+
+      let formDataFinish = new FormData();
+      formDataFinish.append('timestamp', timestamp);
+      formDataFinish.append('name', file_name);
+      formDataFinish.append('size', file_size);
+      formDataFinish.append('total', totalPieces);
+      axios.post(`/upload-big-file-finished`, formDataFinish).then((res) => {
+        if (res.data.code == 1) {
+          alert('合并成功')
+          this.uploadPercentage = 0;
+        } else {
+          Promise.reject("文件合并过程中服务器发生错误");
+        }
+      });
+    }
+
+  </script>
+</body>
+
+</html>
+```
+
+
+
+``` js
+// fs 的替代品 fs-extra
+const router = require("koa-router")();
+const fse = require("fs-extra");
+const fs = require("fs");
+const path = require("path");
+
+const mkdirsSync = (dirname) => {
+  if (fse.existsSync(dirname)) {
+    return true;
+  } else {
+    if (mkdirsSync(path.dirname(dirname))) {
+      // 递归创建所有不存在的目录
+      fse.mkdirSync(dirname); // 创建目录
+      return true;
+    }
+  }
+};
+
+const uploadPath = path.resolve(__dirname, "../upload");
+
+router.get("/", async (ctx, next) => {
+  await ctx.render("index", {
+    title: "Hello Koa 2!",
+  });
+});
+
+// 路由
+router.post("/upload-big-file", async (ctx, next) => {
+  const { timestamp, chunkname, name, size, total, index } = ctx.request.body;
+
+  // 根据文件名和时间戳, 在upload录创建临时文件夹存储分片数据
+  const chunksPath = path.resolve(
+    uploadPath,
+    `file_temp_${name}_${timestamp}/`
+  );
+
+  if (!fse.existsSync(chunksPath)) {
+    // 如果文件夹不存在, 创建文件夹
+    mkdirsSync(chunksPath);
+  }
+
+  const file = ctx.request.files.file; // 前端上传的文件
+  const data = fs.readFileSync(file.path); // 获取文件数据
+  fs.writeFileSync(
+    // 写到upload下的临时文件夹钟
+    path.resolve(chunksPath, `${chunkname}-${total}-${timestamp}`),
+    data,
+    () => {
+      // err
+    }
+  );
+
+  ctx.body = {
+    code: 1,
+    msg: "上传成功，可继续传输",
+  };
+});
+
+// 合并文件
+router.post("/upload-big-file-finished", async (ctx, next) => {
+  const { timestamp, name, total, size } = ctx.request.body;
+
+  const chunksPath = path.resolve(
+    uploadPath,
+    `file_temp_${name}_${timestamp}/`
+  ); // 分片文件夹路径
+  const savedFilePath = path.resolve(uploadPath, `${timestamp}-${name}`); // 合并分片后, 文件要存储在哪里(包括文件名称)
+  const chunks = fs.readdirSync(chunksPath); // 读取目录的内容 ['1.txt', '2.png']
+
+  if (chunks.length != total || chunks.length === 0) {
+    // 分片数据个数 和 前端传的total不一致代表数据有问题, 不能合并
+    ctx.body = {
+      code: 1,
+      msg: "切片文件数量不符合",
+    };
+    chunks.forEach((item) => {
+      fs.unlinkSync(chunksPath + "/" + item); // 删除文件或符号链接
+    });
+    fs.rmdirSync(chunksPath); // 删除文件夹
+  } else {
+    for (let i = 0; i < total; i++) {
+      // 能合并
+      // 拼接分片文件的路径, ${i} 是因为前端传分片时, 会添加分片索引: fname.0  fname.1
+      let chunkFilePath = path.resolve(
+        chunksPath,
+        `${name}.${i}-${total}-${timestamp}`
+      );
+      fs.appendFileSync(savedFilePath, fs.readFileSync(chunkFilePath)); // 追加写入文件数据
+      fs.unlinkSync(chunkFilePath); // 写入完成后, 删除对应的分片
+    }
+    fs.rmdirSync(chunksPath); // 删除文件夹
+  }
+
+  ctx.body = {
+    code: 1,
+    msg: "切片文件合并成功",
+    data: {
+      url: `${timestamp}-${name}`,
+    },
+  };
+});
+module.exports = router;
+```
+
+
+
+`path.dirname(dirname)` 返回目录名: 
+
+`path.dirname("E:/Read_File/haha")` 结果： `E:/Read_File`
+
