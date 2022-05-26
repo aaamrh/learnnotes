@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>EJS Welcome to <%= title %>
+  </p>
+  <form enctype="multipart/form-data">
+    <input type="file">
+  </form>
+  <button type="button" onclick="submit()">上传</button>
+
+  <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js"
+    type="application/javascript"></script>
+  <script>
+
+    function submit() {
+      ApiUploadBigFile(document.getElementsByTagName('input')[0].files[0])
+    }
+
+    async function ApiUploadBigFile(file) {
+      let bytesPerPiece = 5 * 1024 * 1024;//切片大小
+      let start = 0;
+      let end;
+      let index = 0;
+      let file_size = file.size;
+      let file_name = file.name;
+      let totalPieces = Math.ceil(file_size / bytesPerPiece);
+      let timestamp = new Date().getTime();
+
+      console.log(file_size, bytesPerPiece)
+
+      while (start < file_size) {
+        end = start + bytesPerPiece;
+        if (end > file_size) {
+          end = file_size;
+        }
+        let chunk = file.slice(start, end);//执行切片操作
+        let sliceName = file_name + "." + index;
+        let formData = new FormData();
+        formData.append('timestamp', timestamp);
+        formData.append('chunkname', sliceName);
+        formData.append('name', file_name);
+        formData.append('size', file_size);
+        formData.append('total', totalPieces);
+        formData.append('index', index);
+        formData.append('file', chunk);//将表单id、文件、文件名输入form表单中，如果第三个参数不设置，则默认使用blob作为文件名
+
+        console.log(file, chunk)
+
+        let res1 = await axios.post(`/upload-big-file`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        if (res1.data.code == 1) {
+          console.log(`已传输${index + 1}个切片，共${totalPieces}个切片`)
+          this.uploadPercentage = Math.ceil((index + 1) / totalPieces * 100);
+          start = end;
+          index++;
+        } else {
+          Promise.reject("文件传输过程中服务器发生错误");
+          return;
+        }
+      }
+
+      let formDataFinish = new FormData();
+      formDataFinish.append('timestamp', timestamp);
+      formDataFinish.append('name', file_name);
+      formDataFinish.append('size', file_size);
+      formDataFinish.append('total', totalPieces);
+      axios.post(`/upload-big-file-finished`, formDataFinish).then((res) => {
+        if (res.data.code == 1) {
+          alert('合并成功')
+          this.uploadPercentage = 0;
+        } else {
+          Promise.reject("文件合并过程中服务器发生错误");
+        }
+      });
+    }
+
+  </script>
+</body>
+
+</html>
