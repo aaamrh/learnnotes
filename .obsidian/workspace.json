@@ -23,6 +23,24 @@
           }
         ],
         "stacked": true
+      },
+      {
+        "id": "bf1449ceab89d22c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "88f1e987f12c70b8",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "_assets/medias/Pasted image 20260210134007.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260210134007"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -54,7 +72,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:撒地方撒地方",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,17 +92,63 @@
               "icon": "lucide-bookmark",
               "title": "书签"
             }
+          },
+          {
+            "id": "1cb9e672fbb50690",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 347.5
   },
   "right": {
     "id": "db9dd499c608f2d5",
     "type": "split",
     "children": [
+      {
+        "id": "3151d8a2a313a82c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f4054c704dd059a3",
+            "type": "leaf",
+            "state": {
+              "type": "quiet-outline",
+              "state": {},
+              "icon": "lines-of-text",
+              "title": "Quiet Outline"
+            }
+          },
+          {
+            "id": "3ac2a2ec831e033e",
+            "type": "leaf",
+            "state": {
+              "type": "BC-matrix",
+              "state": {},
+              "icon": "BC-trail-icon",
+              "title": "Breadcrumbs Matrix"
+            }
+          },
+          {
+            "id": "2fb056f51451d223",
+            "type": "leaf",
+            "state": {
+              "type": "BC-tree",
+              "state": {},
+              "icon": "feather-corner-right-down",
+              "title": "Breadcrumbs Down"
+            }
+          }
+        ]
+      },
       {
         "id": "a8221ca98b53249c",
         "type": "tabs",
@@ -185,23 +249,13 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
-          },
-          {
-            "id": "f4054c704dd059a3",
-            "type": "leaf",
-            "state": {
-              "type": "quiet-outline",
-              "state": {},
-              "icon": "lines-of-text",
-              "title": "Quiet Outline"
-            }
           }
         ],
         "currentTab": 6
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 788.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -216,22 +270,37 @@
       "workspaces:管理工作区布局": false,
       "random-note:开始漫游笔记": false,
       "obsidian-git:Open Git source control": false,
-      "copilot:Open Copilot Chat": false
+      "copilot:Open Copilot Chat": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
+      "omnisearch:Omnisearch": false,
+      "templater-obsidian:Templater": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "breadcrumbs:Breadcrumbs Visualisation": false
     }
   },
   "active": "093b8da52eb5d5a4",
   "lastOpenFiles": [
+    "_assets/medias/截图.png",
+    "编程/工作/2026.1-2026.3.md",
+    "Pasted image 20260210134218.png",
+    "_assets/medias/Pasted image 20260210134007.png",
+    "_assets/medias",
+    "2026-02-10.md",
+    "2026-02-11.md",
+    "编程/工作/2026.4-2026.6.md",
+    "_assets/templates/工作日志.md",
+    "编程/工作/撒地方.md",
+    "webpack.md",
+    "_assets/templates",
+    "_assets",
     "未命名.base",
     "git.md",
-    "webpack.md",
     "python.md",
     "README.md",
     "copilot/copilot-custom-prompts/Clip Web Page.md",
     "threejs.md",
-    "编程/工作/2026.1-2026.3.md",
     "未命名.canvas",
     "未命名 1.canvas",
-    "2026-02-10.md",
     "编程/工作",
     "编程",
     "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
@@ -247,9 +316,7 @@
     "copilot/copilot-custom-prompts/Simplify.md",
     "copilot/copilot-custom-prompts/Summarize.md",
     "copilot/copilot-custom-prompts/Translate to Chinese.md",
-    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "copilot/copilot-custom-prompts",
-    "copilot",
-    "js.md"
+    "copilot"
   ]
 }

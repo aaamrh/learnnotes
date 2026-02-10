@@ -6,6 +6,7 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiBadge",
       "LiAxe"
     ],
     "recentlyUsedIconsSize": 5,
@@ -29,6 +30,5 @@
     "lucideIconPackType": "native",
     "debugMode": false,
     "useInternalPlugins": false
-  },
-  "编程/工作/2026.1-2026.3.md": "LiAxe"
+  }
 }
