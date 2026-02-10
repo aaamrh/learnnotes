@@ -21,28 +21,8 @@
               "title": "2026.1-2026.3"
             }
           }
-        ]
-      },
-      {
-        "id": "56d599b070fb3477",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "a62dcdd9728b3c93",
-            "type": "leaf",
-            "state": {
-              "type": "split-diff-view",
-              "state": {
-                "aFile": "编程/工作/2026.1-2026.3.md",
-                "bFile": "编程/工作/2026.1-2026.3.md",
-                "aRef": "HEAD",
-                "bRef": ""
-              },
-              "icon": "diff",
-              "title": "Diff: 2026.1-2026.3  (Index)"
-            }
-          }
-        ]
+        ],
+        "stacked": true
       }
     ],
     "direction": "vertical"
@@ -115,6 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "编程/工作/2026.1-2026.3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "反向链接"
+              "title": "2026.1-2026.3 的反向链接列表"
             }
           },
           {
@@ -133,11 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "编程/工作/2026.1-2026.3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "出链"
+              "title": "2026.1-2026.3 的出链列表"
             }
           },
           {
@@ -175,12 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "编程/工作/2026.1-2026.3.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "2026.1-2026.3 的大纲"
             }
           },
           {
@@ -201,6 +184,16 @@
               "state": {},
               "icon": "git-pull-request",
               "title": "Source Control"
+            }
+          },
+          {
+            "id": "f4054c704dd059a3",
+            "type": "leaf",
+            "state": {
+              "type": "quiet-outline",
+              "state": {},
+              "icon": "lines-of-text",
+              "title": "Quiet Outline"
             }
           }
         ],
@@ -226,14 +219,21 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "a62dcdd9728b3c93",
+  "active": "093b8da52eb5d5a4",
   "lastOpenFiles": [
+    "未命名.base",
+    "git.md",
+    "webpack.md",
+    "python.md",
+    "README.md",
+    "copilot/copilot-custom-prompts/Clip Web Page.md",
+    "threejs.md",
     "编程/工作/2026.1-2026.3.md",
+    "未命名.canvas",
+    "未命名 1.canvas",
     "2026-02-10.md",
     "编程/工作",
     "编程",
-    "未命名 1.canvas",
-    "copilot/copilot-custom-prompts/Clip Web Page.md",
     "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
     "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
     "copilot/copilot-custom-prompts/Rewrite as tweet.md",
@@ -250,7 +250,6 @@
     "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "copilot/copilot-custom-prompts",
     "copilot",
-    "未命名.canvas",
     "js.md"
   ]
 }
