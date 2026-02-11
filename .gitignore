@@ -2,3 +2,14 @@
 ~$*.ppt
 ~$*.pptx 
 ~$*.xls
+
+# 1. 忽略工作区状态 (这是产生冲突的万恶之源)
+# workspace 记录了你打开了哪些面板、滚动条位置等，每个设备都不同，不需要同步
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# 2. 忽略缓存和临时文件
+.obsidian/cache
+.obsidian/access-token
+.obsidian/*-cache
