@@ -30,5 +30,9 @@
     "lucideIconPackType": "native",
     "debugMode": false,
     "useInternalPlugins": false
+  },
+  "编程": {
+    "iconName": "LiAxe",
+    "iconColor": "#44d31d"
   }
 }

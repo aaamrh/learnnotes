@@ -15,7 +15,17 @@
               "state": {
                 "file": "编程/工作/2026.1-2026.3.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
               "title": "2026.1-2026.3"
@@ -25,19 +35,31 @@
         "stacked": true
       },
       {
-        "id": "bf1449ceab89d22c",
+        "id": "bc650f679858ef8e",
         "type": "tabs",
         "children": [
           {
-            "id": "88f1e987f12c70b8",
+            "id": "48911787a606af4d",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "_assets/medias/Pasted image 20260210134007.png"
+                "file": "编程/工作/2026.1-2026.3.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20260210134007"
+              "icon": "lucide-file",
+              "title": "2026.1-2026.3"
             }
           }
         ]
@@ -131,6 +153,26 @@
             "id": "3ac2a2ec831e033e",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "2fb056f51451d223",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "b577a7c77de0c4f9",
+            "type": "leaf",
+            "state": {
               "type": "BC-matrix",
               "state": {},
               "icon": "BC-trail-icon",
@@ -138,7 +180,7 @@
             }
           },
           {
-            "id": "2fb056f51451d223",
+            "id": "0102f632ad78a0ed",
             "type": "leaf",
             "state": {
               "type": "BC-tree",
@@ -159,7 +201,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_assets/medias/Pasted image 20260210134007.png",
+                "file": "编程/工作/2026.1-2026.3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -169,7 +211,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Pasted image 20260210134007 的反向链接列表"
+              "title": "2026.1-2026.3 的反向链接列表"
             }
           },
           {
@@ -178,12 +220,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_assets/medias/Pasted image 20260210134007.png",
+                "file": "编程/工作/2026.1-2026.3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Pasted image 20260210134007 的出链列表"
+              "title": "2026.1-2026.3 的出链列表"
             }
           },
           {
@@ -221,13 +263,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_assets/medias/Pasted image 20260210134007.png",
+                "file": "编程/工作/2026.1-2026.3.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Pasted image 20260210134007 的大纲"
+              "title": "2026.1-2026.3 的大纲"
             }
           },
           {
@@ -255,7 +297,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 788.5
+    "width": 565.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -270,7 +312,6 @@
       "workspaces:管理工作区布局": false,
       "random-note:开始漫游笔记": false,
       "obsidian-git:Open Git source control": false,
-      "copilot:Open Copilot Chat": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "omnisearch:Omnisearch": false,
       "templater-obsidian:Templater": false,
@@ -278,45 +319,48 @@
       "breadcrumbs:Breadcrumbs Visualisation": false
     }
   },
-  "active": "093b8da52eb5d5a4",
+  "active": "f4054c704dd059a3",
   "lastOpenFiles": [
+    "_assets/medias.md",
     "编程/工作/2026.1-2026.3.md",
-    "_assets/medias/截图.png",
-    "Pasted image 20260210134218.png",
+    "_assets/templates/工作日志.md",
+    "编程/前端/html & css/css.md",
+    "编程/前端/html & css",
+    "编程/前端/HTML & CSS/1.md",
+    "编程/前端/HTML & CSS",
+    "编程/前端",
+    "server.md",
+    "SEO.md",
+    "nginx.md",
+    "C.md",
+    "flask.md",
+    "js.md",
+    "git.md",
+    "python.md",
+    "README.md",
+    "threejs.md",
+    "webpack.md",
+    "vue.md",
+    "mysql.md",
+    "babylonjs.md",
+    "开发文档.md",
     "_assets/medias/Pasted image 20260210134007.png",
+    "Pasted image 20260210134218.png",
+    "_assets/medias/截图.png",
     "_assets/medias",
     "2026-02-10.md",
     "2026-02-11.md",
     "编程/工作/2026.4-2026.6.md",
-    "_assets/templates/工作日志.md",
     "编程/工作/撒地方.md",
-    "webpack.md",
     "_assets/templates",
     "_assets",
     "未命名.base",
-    "git.md",
-    "python.md",
-    "README.md",
     "copilot/copilot-custom-prompts/Clip Web Page.md",
-    "threejs.md",
     "未命名.canvas",
     "未命名 1.canvas",
     "编程/工作",
     "编程",
     "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
-    "copilot/copilot-custom-prompts/Remove URLs.md",
-    "copilot/copilot-custom-prompts/Generate glossary.md",
-    "copilot/copilot-custom-prompts/Generate table of contents.md",
-    "copilot/copilot-custom-prompts/Make longer.md",
-    "copilot/copilot-custom-prompts/Make shorter.md",
-    "copilot/copilot-custom-prompts/Emojify.md",
-    "copilot/copilot-custom-prompts/Explain like I am 5.md",
-    "copilot/copilot-custom-prompts/Simplify.md",
-    "copilot/copilot-custom-prompts/Summarize.md",
-    "copilot/copilot-custom-prompts/Translate to Chinese.md",
-    "copilot/copilot-custom-prompts",
-    "copilot"
+    "copilot/copilot-custom-prompts"
   ]
 }

@@ -1,28 +1,60 @@
 {
   "recentFiles": [
     {
-      "basename": "Pasted image 20260210134007",
-      "path": "_assets/medias/Pasted image 20260210134007.png"
-    },
-    {
       "basename": "2026.1-2026.3",
       "path": "编程/工作/2026.1-2026.3.md"
-    },
-    {
-      "basename": "截图",
-      "path": "_assets/medias/截图.png"
-    },
-    {
-      "basename": "2026.4-2026.6",
-      "path": "编程/工作/2026.4-2026.6.md"
     },
     {
       "basename": "工作日志",
       "path": "_assets/templates/工作日志.md"
     },
     {
+      "basename": "css",
+      "path": "编程/前端/html & css/css.md"
+    },
+    {
+      "basename": "server",
+      "path": "server.md"
+    },
+    {
+      "basename": "SEO",
+      "path": "SEO.md"
+    },
+    {
+      "basename": "nginx",
+      "path": "nginx.md"
+    },
+    {
+      "basename": "C",
+      "path": "C.md"
+    },
+    {
+      "basename": "flask",
+      "path": "flask.md"
+    },
+    {
+      "basename": "js",
+      "path": "js.md"
+    },
+    {
+      "basename": "git",
+      "path": "git.md"
+    },
+    {
+      "basename": "threejs",
+      "path": "threejs.md"
+    },
+    {
       "basename": "webpack",
       "path": "webpack.md"
+    },
+    {
+      "basename": "mysql",
+      "path": "mysql.md"
+    },
+    {
+      "basename": "2026.4-2026.6",
+      "path": "编程/工作/2026.4-2026.6.md"
     }
   ],
   "omittedPaths": [],
