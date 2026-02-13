@@ -2,5 +2,9 @@
   "newFileLocation": "root",
   "attachmentFolderPath": "_assets/medias",
   "alwaysUpdateLinks": true,
-  "promptDelete": false
+  "promptDelete": false,
+  "showLineNumber": true,
+  "rightToLeft": false,
+  "strictLineBreaks": true,
+  "defaultViewMode": "preview"
 }

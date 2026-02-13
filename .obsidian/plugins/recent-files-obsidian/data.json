@@ -1,8 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "代码片段",
+      "path": "编程/代码片段/代码片段.md"
+    },
+    {
       "basename": "2026.1-2026.3",
       "path": "编程/工作/2026.1-2026.3.md"
+    },
+    {
+      "basename": "js",
+      "path": "js.md"
+    },
+    {
+      "basename": "2026.4-2026.6",
+      "path": "编程/工作/2026.4-2026.6.md"
+    },
+    {
+      "basename": "注释",
+      "path": "注释.md"
+    },
+    {
+      "basename": "Git",
+      "path": "Git.md"
     },
     {
       "basename": "工作日志",
@@ -33,14 +53,6 @@
       "path": "flask.md"
     },
     {
-      "basename": "js",
-      "path": "js.md"
-    },
-    {
-      "basename": "git",
-      "path": "git.md"
-    },
-    {
       "basename": "threejs",
       "path": "threejs.md"
     },
@@ -51,10 +63,6 @@
     {
       "basename": "mysql",
       "path": "mysql.md"
-    },
-    {
-      "basename": "2026.4-2026.6",
-      "path": "编程/工作/2026.4-2026.6.md"
     }
   ],
   "omittedPaths": [],

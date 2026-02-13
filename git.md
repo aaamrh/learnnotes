@@ -1,4 +1,4 @@
-# Git 
+# Git
 ## fork: GitHub怎样fork别人代码到自己仓库并进行贡献
 
 > 1. 在 Github 上 fork 想要参与的项目仓库 **qingtong/pinghu**, fork后会生成自己的项目 **marh/pinghu**
@@ -28,3 +28,15 @@
 `git add .`  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
 
 `git add .` 后撤销： `git reset .`
+
+
+## 如果有的文件需要放到 gitignore ，但是已经提交到仓库了怎么处理
+
+
+1. 首先把要忽略的添加到 .gitignore 中，然后从 Git 索引中移除 .obsidian 下的所有文件（保留本地文件，只是不再追踪）
+`git rm -r --cached .obsidian`
+
+2. `git add .`（此时 Git 会遵守新的 .gitignore 规则）
+
+3. 提交
+`git commit -m "chore: update gitignore to exclude workspace state"`

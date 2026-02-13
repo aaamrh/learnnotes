@@ -6,6 +6,7 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "🥭",
       "LiBadge",
       "LiAxe"
     ],
@@ -34,5 +35,6 @@
   "编程": {
     "iconName": "LiAxe",
     "iconColor": "#44d31d"
-  }
+  },
+  "编程/代码片段/代码片段.md": "🥭"
 }
