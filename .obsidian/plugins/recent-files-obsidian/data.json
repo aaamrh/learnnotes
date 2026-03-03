@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "日光之下无新事",
+      "path": "理财/宝贵经验/日光之下无新事.md"
+    },
+    {
+      "basename": "未命名",
+      "path": "理财/未命名.md"
+    },
+    {
+      "basename": "2026.1-2026.3",
+      "path": "编程/工作/2026.1-2026.3.md"
+    },
+    {
       "basename": "2026年第一季度",
       "path": "每天三件事/2026.1-2026.3/2026年第一季度.md"
     },
@@ -9,8 +21,12 @@
       "path": "编程/代码片段/代码片段.md"
     },
     {
-      "basename": "2026.1-2026.3",
-      "path": "编程/工作/2026.1-2026.3.md"
+      "basename": "threejs",
+      "path": "threejs.md"
+    },
+    {
+      "basename": "Git",
+      "path": "Git.md"
     },
     {
       "basename": "js",
@@ -23,10 +39,6 @@
     {
       "basename": "注释",
       "path": "注释.md"
-    },
-    {
-      "basename": "Git",
-      "path": "Git.md"
     },
     {
       "basename": "工作日志",
@@ -55,10 +67,6 @@
     {
       "basename": "flask",
       "path": "flask.md"
-    },
-    {
-      "basename": "threejs",
-      "path": "threejs.md"
     },
     {
       "basename": "webpack",
