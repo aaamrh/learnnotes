@@ -724,15 +724,15 @@
     "expandedKeys": []
   },
   "编程/前端/王炸设计/第一卷.md": {
-    "scroll": 1385.3810046059746,
+    "scroll": 1890.0537544512542,
     "cursor": {
       "from": {
-        "line": 1445,
-        "ch": 45
+        "line": 1967,
+        "ch": 20
       },
       "to": {
-        "line": 1445,
-        "ch": 45
+        "line": 1967,
+        "ch": 20
       }
     },
     "expandedKeys": [
@@ -755,7 +755,7 @@
     "expandedKeys": []
   },
   "理财/量价分析/TFWD.md": {
-    "scroll": 7.80555534362793,
+    "scroll": 0,
     "cursor": {
       "from": {
         "line": 45,
@@ -764,6 +764,79 @@
       "to": {
         "line": 45,
         "ch": 14
+      }
+    },
+    "expandedKeys": []
+  },
+  "编程/前端/Frida/未命名.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 0,
+        "ch": 0
+      },
+      "to": {
+        "line": 0,
+        "ch": 0
+      }
+    },
+    "expandedKeys": []
+  },
+  "编程/前端/Frida/工作中摸爬滚打日志.md": {
+    "scroll": 253.5193446931385,
+    "cursor": {
+      "from": {
+        "line": 283,
+        "ch": 0
+      },
+      "to": {
+        "line": 283,
+        "ch": 0
+      }
+    },
+    "expandedKeys": [
+      "item-1-0",
+      "item-2-2"
+    ]
+  },
+  "编程/未命名.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 0,
+        "ch": 0
+      },
+      "to": {
+        "line": 0,
+        "ch": 0
+      }
+    },
+    "expandedKeys": []
+  },
+  "编程/成长方式/未命名.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 0,
+        "ch": 0
+      },
+      "to": {
+        "line": 0,
+        "ch": 0
+      }
+    },
+    "expandedKeys": []
+  },
+  "编程/成长方式/思考.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 238,
+        "ch": 52
+      },
+      "to": {
+        "line": 238,
+        "ch": 52
       }
     },
     "expandedKeys": []
