@@ -5,6 +5,22 @@
       "path": "圆梦/长安首富/项目设计.md"
     },
     {
+      "basename": "工作日志",
+      "path": "_assets/templates/工作日志.md"
+    },
+    {
+      "basename": "C",
+      "path": "C.md"
+    },
+    {
+      "basename": "注释",
+      "path": "注释.md"
+    },
+    {
+      "basename": "点击事件过程",
+      "path": "images/js/点击事件过程.png"
+    },
+    {
       "basename": "2026年第一季度",
       "path": "每天三件事/2026.1-2026.3/2026年第一季度.md"
     },
@@ -41,14 +57,6 @@
       "path": "编程/工作/2026.4-2026.6.md"
     },
     {
-      "basename": "注释",
-      "path": "注释.md"
-    },
-    {
-      "basename": "工作日志",
-      "path": "_assets/templates/工作日志.md"
-    },
-    {
       "basename": "css",
       "path": "编程/前端/html & css/css.md"
     },
@@ -63,10 +71,6 @@
     {
       "basename": "nginx",
       "path": "nginx.md"
-    },
-    {
-      "basename": "C",
-      "path": "C.md"
     },
     {
       "basename": "flask",
