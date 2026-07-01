@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "项目设计",
+      "path": "圆梦/长安首富/项目设计.md"
+    },
+    {
       "basename": "第一卷",
       "path": "编程/前端/王炸设计/第一卷.md"
     },
@@ -45,12 +49,28 @@
       "path": "理财/交易计划模板.md"
     },
     {
-      "basename": "项目设计",
-      "path": "圆梦/长安首富/项目设计.md"
+      "basename": "工作日志",
+      "path": "_assets/templates/工作日志.md"
+    },
+    {
+      "basename": "C",
+      "path": "C.md"
+    },
+    {
+      "basename": "注释",
+      "path": "注释.md"
+    },
+    {
+      "basename": "点击事件过程",
+      "path": "images/js/点击事件过程.png"
     },
     {
       "basename": "2026年第一季度",
       "path": "每天三件事/2026.1-2026.3/2026年第一季度.md"
+    },
+    {
+      "basename": "日光之下无新事",
+      "path": "理财/宝贵经验/日光之下无新事.md"
     },
     {
       "basename": "git",
@@ -59,6 +79,14 @@
     {
       "basename": "2026年第一季度",
       "path": "每天三件事/2026.1-2026.3/2026年第一季度.md"
+    },
+    {
+      "basename": "2026.1-2026.3",
+      "path": "编程/工作/2026.1-2026.3.md"
+    },
+    {
+      "basename": "代码片段",
+      "path": "编程/代码片段/代码片段.md"
     },
     {
       "basename": "threejs",
@@ -71,14 +99,6 @@
     {
       "basename": "js",
       "path": "js.md"
-    },
-    {
-      "basename": "注释",
-      "path": "注释.md"
-    },
-    {
-      "basename": "工作日志",
-      "path": "_assets/templates/工作日志.md"
     },
     {
       "basename": "css",
@@ -95,10 +115,6 @@
     {
       "basename": "nginx",
       "path": "nginx.md"
-    },
-    {
-      "basename": "C",
-      "path": "C.md"
     },
     {
       "basename": "flask",
