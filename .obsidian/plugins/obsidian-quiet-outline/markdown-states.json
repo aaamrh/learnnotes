@@ -724,15 +724,15 @@
     "expandedKeys": []
   },
   "编程/前端/王炸设计/第一卷.md": {
-    "scroll": 1890.0537544512542,
+    "scroll": 279.9118896325429,
     "cursor": {
       "from": {
-        "line": 1967,
-        "ch": 20
+        "line": 307,
+        "ch": 28
       },
       "to": {
-        "line": 1967,
-        "ch": 20
+        "line": 307,
+        "ch": 28
       }
     },
     "expandedKeys": [
@@ -783,7 +783,7 @@
     "expandedKeys": []
   },
   "编程/前端/Frida/工作中摸爬滚打日志.md": {
-    "scroll": 253.5193446931385,
+    "scroll": 258.34474926903135,
     "cursor": {
       "from": {
         "line": 283,
@@ -795,8 +795,8 @@
       }
     },
     "expandedKeys": [
-      "item-1-0",
-      "item-2-2"
+      "item-2-2",
+      "item-1-0"
     ]
   },
   "编程/未命名.md": {
@@ -828,7 +828,7 @@
     "expandedKeys": []
   },
   "编程/成长方式/思考.md": {
-    "scroll": 0,
+    "scroll": 208.59722741444907,
     "cursor": {
       "from": {
         "line": 238,
@@ -837,6 +837,20 @@
       "to": {
         "line": 238,
         "ch": 52
+      }
+    },
+    "expandedKeys": []
+  },
+  "常用命令.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 2,
+        "ch": 0
+      },
+      "to": {
+        "line": 2,
+        "ch": 61
       }
     },
     "expandedKeys": []
