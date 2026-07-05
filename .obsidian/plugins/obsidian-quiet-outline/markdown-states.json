@@ -825,7 +825,7 @@
     "expandedKeys": []
   },
   "编程/前端/Frida/工作中摸爬滚打日志.md": {
-    "scroll": 258.34474926903135,
+    "scroll": 254.68272826785133,
     "cursor": {
       "from": {
         "line": 283,
@@ -893,6 +893,20 @@
       "to": {
         "line": 2,
         "ch": 61
+      }
+    },
+    "expandedKeys": []
+  },
+  "编程/前端/Frida/插桩入门.md": {
+    "scroll": 32.57404682654461,
+    "cursor": {
+      "from": {
+        "line": 395,
+        "ch": 3
+      },
+      "to": {
+        "line": 395,
+        "ch": 3
       }
     },
     "expandedKeys": []
