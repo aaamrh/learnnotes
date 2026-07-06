@@ -783,7 +783,7 @@
     "expandedKeys": []
   },
   "编程/前端/Frida/工作中摸爬滚打日志.md": {
-    "scroll": 258.34474926903135,
+    "scroll": 247.21774964105515,
     "cursor": {
       "from": {
         "line": 283,
@@ -851,6 +851,39 @@
       "to": {
         "line": 2,
         "ch": 61
+      }
+    },
+    "expandedKeys": []
+  },
+  "编程/前端/Frida/Frida 从 frida-server 到请求 header 参数抓取实战.md": {
+    "scroll": 384.8043218874229,
+    "cursor": {
+      "from": {
+        "line": 332,
+        "ch": 0
+      },
+      "to": {
+        "line": 332,
+        "ch": 0
+      }
+    },
+    "expandedKeys": [
+      "item-1-0",
+      "item-2-1",
+      "item-2-6",
+      "item-2-14"
+    ]
+  },
+  "编程/前端/Frida/调试.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 3,
+        "ch": 28
+      },
+      "to": {
+        "line": 3,
+        "ch": 28
       }
     },
     "expandedKeys": []
