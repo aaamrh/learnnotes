@@ -115,14 +115,14 @@ public X509Certificate[] getAcceptedIssuers() {
 
 ```
 ┌─────────────────────────────────────────┐
-│ Layer 1: Android native pinning          │  ← overridePins="true" 可绕过
-│ (network_security_config.xml)            │
+│ Layer 1: Android native pinning         │  ← overridePins="true" 可绕过
+│ (network_security_config.xml)           │
 ├─────────────────────────────────────────┤
-│ Layer 2: 程序化证书锁定                   │  ← Frida hook Ao5.A01(List)
-│ (18 SHA-256 hardcoded pins)              │
+│ Layer 2: 程序化证书锁定                 │  ← Frida hook Ao5.A01(List)
+│ (18 SHA-256 hardcoded pins)             │
 ├─────────────────────────────────────────┤
-│ Layer 3: 自定义 TLS 1.3 + 硬编码根证书     │  ← Frida hook D4p.checkServerTrusted()
-│ (ValiCert + DigiCert only)               │
+│ Layer 3: 自定义 TLS 1.3 + 硬编码根证书  │  ← Frida hook D4p.checkServerTrusted()
+│ (ValiCert + DigiCert only)              │
 └─────────────────────────────────────────┘
 ```
 
@@ -482,13 +482,13 @@ frida -U -n WhatsApp -l frida_whatsapp_bypass_v2.js
           │
           ▼
   ┌─────────────────────────────────────────────────┐
-  │  TLS 握手阶段：Charles 要骗 WhatsApp 信任它       │
-  │                                                   │
-  │  Charles 现场打印了一张假证书，递给 WhatsApp：        │
-  │  ┌──────────────────────────┐                    │
-  │  │ 持有者: v.whatsapp.net   │  谎称自己是服务器    │
-  │  │ 签发者: Charles CA       │  签字的章是 Charles   │
-  │  └──────────────────────────┘                    │
+  │  TLS 握手阶段：Charles 要骗 WhatsApp 信任它     │
+  │                                                 │
+  │  Charles 现场打印了一张假证书，递给 WhatsApp：  │
+  │  ┌──────────────────────────┐                   │
+  │  │ 持有者: v.whatsapp.net   │  谎称自己是服务器 │
+  │  │ 签发者: Charles CA       │  签字的章是 Charles│
+  │  └──────────────────────────┘                   │
   └─────────────────────────────────────────────────┘
           │
           ▼
@@ -496,51 +496,51 @@ frida -U -n WhatsApp -l frida_whatsapp_bypass_v2.js
           │
           ▼
   ┌─────────────────────────────────────────────────┐
-  │  Step 1: 签名验算                                │
-  │  "用 Charles CA 的公钥验一下签名"                   │
-  │  结果：签名确实是 Charles 用自己私钥签的 → ✅ 通过     │
+  │  Step 1: 签名验算                               │
+  │  "用 Charles CA 的公钥验一下签名"               │
+  │  结果：签名确实是 Charles 用自己私钥签的 → ✅ 通过  │
   └─────────────────────────────────────────────────┘
           │
           ▼
   ┌─────────────────────────────────────────────────┐
-  │  Step 2: 查信任库（谁给 Charles CA 担保？）          │
-  │                                                   │
-  │  证书链往上追溯，顶端的根证书是 "Charles CA"            │
-  │  WhatsApp 问："Charles CA 值得信任吗？"               │
-  │                                                   │
-  │  这里分两条路：                                     │
-  │                                                   │
-  │  ┌─ 默认路径（大部分 App 走这里）                      │
-  │  │  查系统信任库（户口本，几百个证书）                    │
-  │  │  → 你装过 Charles 根证书 → 找到了 → ✅              │
-  │  │                                                   │
-  │  └─ WhatsApp 自定路径（D4p TrustManager）              │
-  │      不看户口本，掏口袋里的纸条                          │
-  │      纸条上只写了两个名字：                              │
-  │        ☑ ValiCert                                    │
-  │        ☑ DigiCert Global Root CA                     │
-  │        ☐ Charles  ← 纸条上没有！❌                      │
-  │                                                      │
-  │      纸条上没有 Charles → 不信任 → 抛异常               │
-  │      → 这就是你在 Charles 里看到的：                    │
-  │         certificate_unknown (46)                     │
-  │         "An unknown issue occurred processing the cert" │
+  │  Step 2: 查信任库（谁给 Charles CA 担保？）     │
+  │                                                 │
+  │  证书链往上追溯，顶端的根证书是 "Charles CA"    │
+  │  WhatsApp 问："Charles CA 值得信任吗？"         │
+  │                                                 │
+  │  这里分两条路：                                 │
+  │                                                 │
+  │  ┌─ 默认路径（大部分 App 走这里）               │
+  │  │  查系统信任库（户口本，几百个证书）          │
+  │  │  → 你装过 Charles 根证书 → 找到了 → ✅       
+  │  │                                              │
+  │  └─ WhatsApp 自定路径（D4p TrustManager）       │
+  │      不看户口本，掏口袋里的纸条                 │
+  │      纸条上只写了两个名字：                     │
+  │        ☑ ValiCert                               │
+  │        ☑ DigiCert Global Root CA                │
+  │        ☐ Charles  ← 纸条上没有！❌              │
+  │                                                 │
+  │      纸条上没有 Charles → 不信任 → 抛异常       │
+  │      → 这就是你在 Charles 里看到的：            │
+  │         certificate_unknown (46)                │
+  │    "An unknown issue occurred processing the cert" │
   └─────────────────────────────────────────────────┘
           │
           ▼
   ┌─────────────────────────────────────────────────┐
-  │  Step 3: Ao5 公钥哈希白名单检查                     │
+  │  Step 3: Ao5 公钥哈希白名单检查                 │
   │  （针对不同的网络路径，这里和 Step 2 可能互换顺序）     │
-  │                                                   │
-  │  WhatsApp 口袋里还有另一张纸条：                       │
-  │  18 个公钥 SHA-256 哈希值                            │
+  │                                                 │
+  │  WhatsApp 口袋里还有另一张纸条：                │
+  │  18 个公钥 SHA-256 哈希值                       │
   │      grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME=  │
   │      58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=  │
-  │      ... (共 18 个)                                 │
-  │                                                   │
-  │  把 Charles 证书的公钥算 SHA-256                     │
-  │  在白名单里搜 → 没有 → ❌                             │
-  │  抛异常："pinning error"                            │
+  │      ... (共 18 个)                             │
+  │                                                 │
+  │  把 Charles 证书的公钥算 SHA-256                │
+  │  在白名单里搜 → 没有 → ❌                       │
+  │  抛异常："pinning error"                        │
   └─────────────────────────────────────────────────┘
           │
           │  Frida 脚本介入：
@@ -549,22 +549,22 @@ frida -U -n WhatsApp -l frida_whatsapp_bypass_v2.js
           │
           ▼
   ┌─────────────────────────────────────────────────┐
-  │  ✅ 两张纸条的检查都被跳过了                          │
-  │  WhatsApp 接受 Charles 的假证书                     │
-  │  TLS 握手完成，Charles 拿到对称加密密钥               │
+  │  ✅ 两张纸条的检查都被跳过了                    │
+  │  WhatsApp 接受 Charles 的假证书                 │
+  │  TLS 握手完成，Charles 拿到对称加密密钥         │
   └─────────────────────────────────────────────────┘
           │
           ▼
   ┌─────────────────────────────────────────────────┐
-  │  数据开始传输                                      │
-  │                                                   │
-  │  WhatsApp ──加密──▶ Charles ──解密──▶ 查看明文     │
-  │                     Charles ──加密──▶ 真实服务器    │
-  │                                                   │
-  │  Charles 窗口里能看到：                              │
-  │    https://v.whatsapp.net/v2/sync                 │
-  │    Request Body: {...JSON...}                     │
-  │    Response Body: {...JSON...}                    │
+  │  数据开始传输                                   │
+  │                                                 │
+  │  WhatsApp ──加密──▶ Charles ──解密──▶ 查看明文  │
+  │                     Charles ──加密──▶ 真实服务器│
+  │                                                 │
+  │  Charles 窗口里能看到：                         │
+  │    https://v.whatsapp.net/v2/sync               │
+  │    Request Body: {...JSON...}                   │
+  │    Response Body: {...JSON...}                  │
   └─────────────────────────────────────────────────┘
 ```
 
