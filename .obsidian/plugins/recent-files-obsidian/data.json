@@ -1,6 +1,66 @@
 {
   "recentFiles": [
     {
+      "basename": "中远海控",
+      "path": "理财/产业链/中远海控.md"
+    },
+    {
+      "basename": "需求",
+      "path": "圆梦/古诗词/需求.md"
+    },
+    {
+      "basename": "UI",
+      "path": "编程/Prompt/UI.md"
+    },
+    {
+      "basename": "WhatsApp SSL Pinning 绕过与流量抓取实战教学",
+      "path": "编程/前端/Frida/WhatsApp SSL Pinning 绕过与流量抓取实战教学.md"
+    },
+    {
+      "basename": "插桩入门",
+      "path": "编程/前端/Frida/插桩入门.md"
+    },
+    {
+      "basename": "工作中摸爬滚打日志",
+      "path": "编程/前端/Frida/工作中摸爬滚打日志.md"
+    },
+    {
+      "basename": "Frida 从 frida-server 到请求 header 参数抓取实战",
+      "path": "编程/前端/Frida/Frida 从 frida-server 到请求 header 参数抓取实战.md"
+    },
+    {
+      "basename": "TFWD",
+      "path": "理财/量价分析/TFWD.md"
+    },
+    {
+      "basename": "日光之下无新事",
+      "path": "理财/宝贵经验/日光之下无新事.md"
+    },
+    {
+      "basename": "多元思维工具训练",
+      "path": "编程/成长方式/多元思维工具训练.md"
+    },
+    {
+      "basename": "第一性原理",
+      "path": "编程/成长方式/第一性原理.md"
+    },
+    {
+      "basename": "交易计划模板",
+      "path": "理财/交易计划模板.md"
+    },
+    {
+      "basename": "内功修炼",
+      "path": "编程/成长方式/内功修炼.md"
+    },
+    {
+      "basename": "思考",
+      "path": "编程/成长方式/思考.md"
+    },
+    {
+      "basename": "# AI算力与半导体周期：利润传导、产业链地图及A股公司笔记",
+      "path": "理财/产业链/# AI算力与半导体周期：利润传导、产业链地图及A股公司笔记.md"
+    },
+    {
       "basename": "了解到的新知识",
       "path": "编程/后端/了解到的新知识.md"
     },
@@ -9,32 +69,8 @@
       "path": "编程/后端/初识微服务.md"
     },
     {
-      "basename": "交易计划模板",
-      "path": "理财/交易计划模板.md"
-    },
-    {
       "basename": "AI半导体利润传导地图：周期位置、历史押韵与A股公司",
       "path": "理财/产业链/AI半导体利润传导地图：周期位置、历史押韵与A股公司.md"
-    },
-    {
-      "basename": "# AI算力与半导体周期：利润传导、产业链地图及A股公司笔记",
-      "path": "理财/产业链/# AI算力与半导体周期：利润传导、产业链地图及A股公司笔记.md"
-    },
-    {
-      "basename": "Frida 从 frida-server 到请求 header 参数抓取实战",
-      "path": "编程/前端/Frida/Frida 从 frida-server 到请求 header 参数抓取实战.md"
-    },
-    {
-      "basename": "WhatsApp SSL Pinning 绕过与流量抓取实战教学",
-      "path": "编程/前端/Frida/WhatsApp SSL Pinning 绕过与流量抓取实战教学.md"
-    },
-    {
-      "basename": "工作中摸爬滚打日志",
-      "path": "编程/前端/Frida/工作中摸爬滚打日志.md"
-    },
-    {
-      "basename": "插桩入门",
-      "path": "编程/前端/Frida/插桩入门.md"
     },
     {
       "basename": "Android",
@@ -53,10 +89,6 @@
       "path": "常用命令.md"
     },
     {
-      "basename": "思考",
-      "path": "编程/成长方式/思考.md"
-    },
-    {
       "basename": "2026.1-2026.3",
       "path": "编程/工作/2026.1-2026.3.md"
     },
@@ -67,14 +99,6 @@
     {
       "basename": "代码片段",
       "path": "编程/代码片段/代码片段.md"
-    },
-    {
-      "basename": "TFWD",
-      "path": "理财/量价分析/TFWD.md"
-    },
-    {
-      "basename": "日光之下无新事",
-      "path": "理财/宝贵经验/日光之下无新事.md"
     },
     {
       "basename": "重学React",
@@ -99,10 +123,6 @@
     {
       "basename": "2026年第一季度",
       "path": "每天三件事/2026.1-2026.3/2026年第一季度.md"
-    },
-    {
-      "basename": "日光之下无新事",
-      "path": "理财/宝贵经验/日光之下无新事.md"
     },
     {
       "basename": "git",
