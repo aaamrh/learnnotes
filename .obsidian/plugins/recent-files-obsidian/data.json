@@ -1,16 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "Git",
+      "path": "Git.md"
+    },
+    {
+      "basename": "nginx",
+      "path": "nginx.md"
+    },
+    {
+      "basename": "js",
+      "path": "js.md"
+    },
+    {
+      "basename": "注释",
+      "path": "注释.md"
+    },
+    {
+      "basename": "常用命令",
+      "path": "常用命令.md"
+    },
+    {
+      "basename": "C",
+      "path": "C.md"
+    },
+    {
+      "basename": "webpack",
+      "path": "webpack.md"
+    },
+    {
       "basename": "需求",
       "path": "圆梦/古诗词/需求.md"
     },
     {
       "basename": "全链路日志",
       "path": "编程/前端/设计要点/全链路日志.md"
-    },
-    {
-      "basename": "flask",
-      "path": "flask.md"
     },
     {
       "basename": "Socket",
@@ -97,10 +121,6 @@
       "path": "圆梦/长安首富/项目设计.md"
     },
     {
-      "basename": "常用命令",
-      "path": "常用命令.md"
-    },
-    {
       "basename": "2026.1-2026.3",
       "path": "编程/工作/2026.1-2026.3.md"
     },
@@ -119,14 +139,6 @@
     {
       "basename": "工作日志",
       "path": "_assets/templates/工作日志.md"
-    },
-    {
-      "basename": "C",
-      "path": "C.md"
-    },
-    {
-      "basename": "注释",
-      "path": "注释.md"
     },
     {
       "basename": "点击事件过程",
@@ -157,36 +169,8 @@
       "path": "threejs.md"
     },
     {
-      "basename": "Git",
-      "path": "Git.md"
-    },
-    {
-      "basename": "js",
-      "path": "js.md"
-    },
-    {
       "basename": "css",
       "path": "编程/前端/html & css/css.md"
-    },
-    {
-      "basename": "server",
-      "path": "server.md"
-    },
-    {
-      "basename": "SEO",
-      "path": "SEO.md"
-    },
-    {
-      "basename": "nginx",
-      "path": "nginx.md"
-    },
-    {
-      "basename": "webpack",
-      "path": "webpack.md"
-    },
-    {
-      "basename": "mysql",
-      "path": "mysql.md"
     }
   ],
   "omittedPaths": [],

@@ -17,5 +17,6 @@
   "oz-image-plugin",
   "obsidian-link-embed",
   "url-into-selection",
-  "editing-toolbar"
+  "editing-toolbar",
+  "obsidian-local-rest-api"
 ]

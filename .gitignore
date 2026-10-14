@@ -13,3 +13,4 @@
 .obsidian/cache
 .obsidian/access-token
 .obsidian/*-cache
+.obsidian/plugins/obsidian-local-rest-api/data.json
