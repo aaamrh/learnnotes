@@ -1,6 +1,34 @@
 {
   "recentFiles": [
     {
+      "basename": "教训",
+      "path": "理财/宝贵经验/教训.md"
+    },
+    {
+      "basename": "Pinning 绕过与流量抓取实战教学",
+      "path": "编程/前端/Frida/Pinning 绕过与流量抓取实战教学.md"
+    },
+    {
+      "basename": "WhatsApp SSL Pinning 绕过与流量抓取实战教学",
+      "path": "编程/前端/Frida/WhatsApp SSL Pinning 绕过与流量抓取实战教学.md"
+    },
+    {
+      "basename": "webpack",
+      "path": "webpack.md"
+    },
+    {
+      "basename": "2026.10-2026.12",
+      "path": "编程/工作/2026.10-2026.12.md"
+    },
+    {
+      "basename": "2026.1-2026.3",
+      "path": "编程/工作/2026.1-2026.3.md"
+    },
+    {
+      "basename": "入门自查",
+      "path": "编程/后端/入门自查.md"
+    },
+    {
       "basename": "特斯拉汽车能飞",
       "path": "理财/宝贵经验/特斯拉汽车能飞.md"
     },
@@ -37,10 +65,6 @@
       "path": "C.md"
     },
     {
-      "basename": "webpack",
-      "path": "webpack.md"
-    },
-    {
       "basename": "需求",
       "path": "圆梦/古诗词/需求.md"
     },
@@ -63,10 +87,6 @@
     {
       "basename": "UI",
       "path": "编程/Prompt/UI.md"
-    },
-    {
-      "basename": "WhatsApp SSL Pinning 绕过与流量抓取实战教学",
-      "path": "编程/前端/Frida/WhatsApp SSL Pinning 绕过与流量抓取实战教学.md"
     },
     {
       "basename": "插桩入门",
@@ -125,14 +145,6 @@
       "path": "圆梦/长安首富/项目设计.md"
     },
     {
-      "basename": "2026.1-2026.3",
-      "path": "编程/工作/2026.1-2026.3.md"
-    },
-    {
-      "basename": "2026.4-2026.6",
-      "path": "编程/工作/2026.4-2026.6.md"
-    },
-    {
       "basename": "代码片段",
       "path": "编程/代码片段/代码片段.md"
     },
@@ -159,10 +171,6 @@
     {
       "basename": "2026年第一季度",
       "path": "每天三件事/2026.1-2026.3/2026年第一季度.md"
-    },
-    {
-      "basename": "2026.1-2026.3",
-      "path": "编程/工作/2026.1-2026.3.md"
     },
     {
       "basename": "代码片段",
